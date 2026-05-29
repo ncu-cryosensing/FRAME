@@ -82,6 +82,7 @@
       "successMsg": "Short Description has {count} words. Meets the minimum recommended value of 20.",
       "failureMsg": "Short Description has {count} words. Minimum recommended is 20."
     },
+    
 
     {
       "id": "documentation_word_count_findable",
@@ -148,7 +149,7 @@
 
     {
       "id": "download_url",
-      "field": "metadataIdentifier",
+      "field": "url_download",
       "type": "exists",
       "level": "REQUIRED",
       "principle": "Accessible",
@@ -158,7 +159,7 @@
 
     {
       "id": "interactive_map_optional",
-      "field": "metadataCode",
+      "field": "url_map",
       "type": "exists",
       "level": "OPTIONAL",
       "principle": "Accessible",
@@ -168,7 +169,7 @@
 
     {
       "id": "taipihub_optional_accessible",
-      "field": "metadataCode",
+      "field": "url_taipihub",
       "type": "exists",
       "level": "OPTIONAL",
       "principle": "Accessible",
@@ -178,7 +179,7 @@
 
     {
       "id": "api_endpoint_exists_accessible",
-      "field": "metadataIdentifier",
+      "field": "url_api",
       "type": "exists",
       "level": "REQUIRED",
       "principle": "Accessible",
@@ -201,7 +202,7 @@
 
     {
       "id": "taipihub_optional_interoperable",
-      "field": "metadataCode",
+      "field": "url_taipihub",
       "type": "exists",
       "level": "OPTIONAL",
       "principle": "Interoperable",
@@ -211,12 +212,33 @@
 
     {
       "id": "api_exists_interoperable",
-      "field": "metadataIdentifier",
+      "field": "url_api",
       "type": "exists",
       "level": "REQUIRED",
       "principle": "Interoperable",
       "successMsg": "API is present.",
       "failureMsg": "No API is present."
+    },
+
+      {
+      "id": "short_description_ai_quality",
+      "field": "short_description",
+      "type": "aiQuality1",
+      "expected": "Good",
+      "level": "OPTIONAL",
+      "principle": "Reusable",
+      "successMsg": "{aiResult1}.",
+      "failureMsg": "{aiResult1}."
+    },
+    {
+      "id": "documentation_ai_quality",
+      "field": "documentation",
+      "type": "aiQuality2",
+      "expected": "Good",
+      "level": "OPTIONAL",
+      "principle": "Reusable",
+      "successMsg": "{aiResult2}.",
+      "failureMsg": "{aiResult2}."
     },
 
 
@@ -246,8 +268,10 @@
   "info": [
 
     {
+      "id": "resourcetype_exists",
       "field": "resourceType",
       "principle": "Findable",
+      "type": "exists",
       "message": "The resource type is: {value}"
     }
 

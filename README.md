@@ -104,7 +104,11 @@ The app flattens `authors` to an array if it detects
 `dataset.authors.author`.
 
 ## Getting Started
+### Docker-based
 
+```bash
+sudo docker run -it -p 3000:3000 taipidata/metadata_assessment start
+```
 ### 1) Install
 
 ``` bash

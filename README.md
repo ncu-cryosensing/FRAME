@@ -54,139 +54,48 @@ Checks currently include (examples):
 -   Optional integrations like Interactive Map / TaiPIHub
 
 > You can easily add or adjust checks inside `checkMetadata(md)`.
+# Usage
 
+Before running this project, make sure the following software is installed:
 
+- **Node.js 16 or later**
+- **npm** (included with Node.js) or **yarn**
 
-## Expected Metadata Shape
-
-The app normalizes input so `checkMetadata` receives a single **dataset
-object**.\
-Minimum fields checked (examples):
-
-``` json
-{
-  "title": "Dataset title",
-  "metadataIdentifier": 11405141,
-  "metadataCode": "ISWCA",
-  "publicationDate": "2024-09-30T00:00:00.000Z",
-  "doi": "https://doi.org/xxx",
-  "short_description": "At least ~20 words...",
-  "documentation": "At least ~100 words...",
-  "spatialExtent": "...",
-  "corresponding_author": "name@example.com",
-  "license": "cc_by",
-  "authors": [
-    { "name": "First Author", "orcid": "0000-0000-0000-0000", "affiliation": "Org" }
-  ]
-}
-```
-
-### XML Input
-
-For XML, the parser expects a root `<dataset>` with nested authors:
-
-``` xml
-<dataset>
-  <title>...</title>
-  <metadataIdentifier>11405141</metadataIdentifier>
-  <authors>
-    <author>
-      <name>First Author</name>
-      <orcid>0000-0000-0000-0000</orcid>
-      <affiliation>Org</affiliation>
-    </author>
-  </authors>
-  ...
-</dataset>
-```
-
-The app flattens `authors` to an array if it detects
-`dataset.authors.author`.
-
-## Getting Started
-### Docker-based
+## Option 1: Run with Docker
 
 ```bash
-sudo docker run -it -p 3000:3000 taipidata/metadata_assessment start
-```
-### 1) Install
-
-``` bash
-# with npm
-npm install
-
-# or with yarn
-yarn
-
-# or with pnpm
-pnpm install
-```
-
-Make sure you have these dependencies in `package.json`:
-
--   `react`, `react-dom`
--   `react-bootstrap`
--   `framer-motion`
--   `fast-xml-parser`
-
-### 2) Run Dev Server
-
-``` bash
-npm run start
-# or
-yarn start
-# or
-pnpm start
+docker run -it -p 3000:3000 taipidata/metadata_assessment start
 ```
 
 Open http://localhost:3000 in your browser.
 
-### 3) Build for Production
+## Option 2: Run from Source
 
-``` bash
-npm run build
-# or
-yarn build
-# or
-pnpm build
+### Clone the Repository
+
+```bash
+git clone https://github.com/ncu-cryosensing/metadata-assessment.git
+cd metadata_assessment
 ```
 
-## How to Use
+### Install Dependencies
 
-1.  Start the app.
-2.  Paste a **JSON** or **XML** URL into the input box.
-    -   Examples:
-        -   JSON served as `application/json` or `text/plain`
-        -   XML served as `application/xml` or `text/xml`
-3.  Click **Assess**.
-4.  View the chart, per-principle bars, and tabbed checklists.
+```bash
+npm install
+```
 
-> If the URL returns an **array**, the app uses the **first element** as
-> the dataset.
+### Start the Development Server
 
+```bash
+npm run start
+```
 
+Open http://localhost:3000 in your browser.
 
-## Customization
+### Build for Production
 
--   Add or tune checks in `checkMetadata(md)`.
--   Change thresholds (e.g., title 4 words, documentation 100 words) to
-    match your policy.
--   Update informational messages and levels (`REQUIRED`, `OPTIONAL`,
-    `INFO`).
--   Extend UI by editing `SummaryChart`, `AssessmentSection`, and
-    `CheckList`.
+```bash
+npm run build
+```
 
-## Accessibility & UX Notes
-
--   Tabs consolidate results (Passed/Failed/Warnings/Info).
--   `SummaryChart` communicates distribution at a glance.
--   Progress bars per FAIR principle show coverage vs. requirements.
-
-## Testing Tips
-
--   Test JSON with missing fields to verify Failed/Warn counts.
--   Test XML with/without `<authors>`; ensure author normalization
-    works.
--   Try JSON served as `text/plain` and HTML pages with `<pre>`
-    wrappers.
 

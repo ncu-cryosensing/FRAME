@@ -59,9 +59,7 @@ async function evaluateAIQuality(md) {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${process.env.REACT_APP_OPENROUTER_API_KEY}`,
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://your-site.com", // optional
-        "X-Title": "Metadata Assessment" // optional
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         model: "openrouter/owl-alpha",

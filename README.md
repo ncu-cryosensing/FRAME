@@ -60,7 +60,15 @@ Before running this project, make sure the following software is installed:
 
 - **Node.js 16 or later**
 - **npm** (included with Node.js) or **yarn**
+## Configure AI API Key
 
+Create a `.env` file in the project root and add your AI API key:
+
+```env
+REACT_APP_OPENROUTER_API_KEY=your_api_key
+```
+
+Replace `your_api_key` with your actual API key.
 ## Option 1: Run with Docker
 
 ```bash

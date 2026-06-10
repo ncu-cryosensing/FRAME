@@ -88,7 +88,7 @@ Return ONLY valid JSON:
     }
   );
 
-if (response.status === 429) {
+if (response.status === 429 || response.status === 401) {
 
   return {
 

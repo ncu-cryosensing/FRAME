@@ -61,6 +61,9 @@ Before running this project, make sure the following software is installed:
 - **Node.js 16 or later**
 - **npm** (included with Node.js) or **yarn**
 ## Configure AI API Key
+Get an API key from OpenRouter:
+
+https://openrouter.ai/keys
 
 Create a `.env` file in the project root and add your AI API key:
 

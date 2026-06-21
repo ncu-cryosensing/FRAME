@@ -1,29 +1,12 @@
-# TaiPI Metadata Assessment
+# FRAME
 
-The Metadata Assessment Tool is a web-based application designed to evaluate the completeness and quality of metadata records against predefined validation criteria.
-The tool supports dynamic configuration using JSON, allowing users to easily customize validation rules without modifying the application source code.
+FRAME (**FAIR Review and Metadata Evaluation Engine**) is a web-based tool to assess the quality and completeness of the metadata for a given dataset based on the FAIR (Findable, Accessible, Interoperable, and Reusable) principles. With predefined criteria, FRAME accesses the metadata via a URL, reviews the content, validates its FAIRness, and finally provides quality scores for the metadata. This tool is designed for researchers and dataset administrators who need to host or use open datasets, as it provides a common basis for communication about data sharing, an important component of open science. 
 
-By externalizing validation logic into JSON files, the system becomes:
+## How it works
 
-- flexible
-- easily maintainable
-- adaptable to different metadata standards
-- scalable for new validation requirements
+FRAME reads a metadata record formatted in JSON (JavaScript Object Notation). This tool then performs multiple checks defined in `fair_checks.json`. Finally, FRAME displays the status of each check and a summary report for further inspection. Here are some examples of the checks performed by FRAME:
 
-## Features
-
--   **URL-based fetch** of JSON or XML (`application/json`,
-    `application/xml`, `text/xml`, or JSON served as `text/plain`)
--   **Robust XML → JSON** conversion using `fast-xml-parser`
--   **FAIR checks** with per-principle tallies and overall counts
--   **Visual summary** via `SummaryChart` and per-principle progress
-    sections
--   **Tabbed checklists** (Passed, Failed, Warnings, Info)
-
-
-## Core Logic
-
-The main logic lives in `checkMetadata(md)`, which inspects a metadata
+<!-- The main logic lives in `checkMetadata(md)`, which inspects a metadata
 object and produces:
 
 ``` ts
@@ -40,20 +23,36 @@ object and produces:
   failedChecks: Array<{ message, level, principle }>,
   informationalCheck: Array<{ message, level, principle }>
 }
-```
+``` -->
 
-Checks currently include (examples):
+-   Dataset title length
+-   Presence of DOI (Digital Object Identifier)
+-   Author information, such as names, ORCIDs, and affiliations
+-   Date of publication
+-   Quality of description, readme, and documentation file(s)
+-   Public landing page
+-   Data access URLs, including direct downloads and API access
+-   License
+-   Spatial extent (spatial data only)
+-   Cloud-based integrations, such as an online visualization portal or JupyterHub
 
--   Title word count\
--   Presence of identifiers (`metadataIdentifier`, `doi`)\
--   Authors array (name, ORCID, affiliation expected)\
--   `publicationDate`\
--   `short_description` and `documentation` word counts\
--   Spatial extent, landing page, download URL, API URL, dataset
-    license\
--   Optional integrations like Interactive Map / TaiPIHub
+<!-- > You can easily add or adjust checks inside `checkMetadata(md)`. -->
 
-> You can easily add or adjust checks inside `checkMetadata(md)`.
+## Features
+
+-   **URL-based fetch** of JSON or XML (`application/json`,
+    `application/xml`, `text/xml`, or JSON served as `text/plain`)
+-   **Robust XML → JSON** conversion using `fast-xml-parser`
+-   **FAIR checks** with per-principle tallies and overall counts
+-   **Visual summary** via `SummaryChart` and per-principle progress
+    sections
+-   **Tabbed checklists** (Passed, Failed, Warnings, Info)
+
+<!-- The tool supports dynamic configuration using JSON, allowing users to easily customize validation rules without modifying the application source code. -->
+
+<!-- By externalizing validation logic into JSON files, the system becomes flexible, easily maintainable, adaptable to different metadata standards, and scalable for new validation requirements. -->
+
+
 # Usage
 
 Before running this project, make sure the following software is installed:
@@ -109,4 +108,6 @@ Open http://localhost:3000 in your browser.
 npm run build
 ```
 
+## Dev team and contact 
 
+The NCU CryoSensing Team. https://www.ncu-cryosensing.org/

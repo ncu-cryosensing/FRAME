@@ -20,8 +20,8 @@ Replace `your_api_key` with your actual API key.
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/ncu-cryosensing/metadata-assessment.git
-cd frame/api-service
+git clone https://github.com/ncu-cryosensing/FRAME.git
+cd FRAME/api-service
 ```
 
 ### Install Dependencies

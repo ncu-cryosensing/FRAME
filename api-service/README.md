@@ -21,7 +21,7 @@ Replace `your_api_key` with your actual API key.
 
 ```bash
 git clone https://github.com/ncu-cryosensing/metadata-assessment.git
-cd metadata_assessment/api-service
+cd frame/api-service
 ```
 
 ### Install Dependencies

@@ -107,7 +107,25 @@ Open http://localhost:3000 in your browser.
 ```bash
 npm run build
 ```
+## Option 3: Run API
+### Navigate to the API Service Directory
 
+```bash
+cd FRAME/api-service
+```
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Start the Development Server
+
+```bash
+npm run start
+```
+
+Open http://localhost:3006 in your browser.
 ## Dev team and contact 
 
 The NCU CryoSensing Team. https://www.ncu-cryosensing.org/

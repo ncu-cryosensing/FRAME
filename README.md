@@ -84,8 +84,8 @@ Open http://localhost:3000 in your browser.
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/ncu-cryosensing/metadata-assessment.git
-cd metadata_assessment
+git clone https://github.com/ncu-cryosensing/FRAME.git
+cd FRAME
 ```
 
 ### Install Dependencies

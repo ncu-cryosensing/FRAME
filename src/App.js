@@ -53,6 +53,21 @@ function App({ setPage }) {
 }
 async function evaluateAIQuality(md) {
 
+    const dbResponse = await fetch(`http://localhost:3005/records/${md.id}`);
+
+    if (dbResponse.ok) {
+        const data_base = await dbResponse.json();
+    
+        if (data_base && data_base.short_description === md.short_description && data_base.documentation === md.documentation && data_base.ai_result_short_description != null ) {
+            console.log(data_base.ai_result_short_description)
+          return {
+            short_description: data_base.ai_result_short_description,
+            documentation: data_base.ai_result_documentation
+          };
+        }
+      }
+
+    
   const response = await fetch(
     "https://openrouter.ai/api/v1/chat/completions",
     {
@@ -108,7 +123,42 @@ if (response.status === 429 || response.status === 401 || response.status === 40
     .replace(/```json/g, "")
     .replace(/```/g, "")
     .trim();
+    const aiResult = JSON.parse(text);
 
+if (dbResponse.status === 404) {
+  // Record doesn't exist -> Create
+  await fetch("http://localhost:3005/records", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id_metadata: md.id,
+      ai_result_short_description: aiResult.short_description,
+      ai_result_documentation: aiResult.documentation,
+      short_description: md.short_description,
+      documentation: md.documentation
+    })
+  });
+} else if (dbResponse.ok) {
+  // Record exists -> Update
+  await fetch(`http://localhost:3005/records/${md.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id_metadata: md.id,
+      ai_result_short_description: aiResult.short_description,
+      ai_result_documentation: aiResult.documentation,
+      short_description: md.short_description,
+      documentation: md.documentation
+    })
+  });
+} else {
+  throw new Error(`Database request failed: ${dbResponse.status}`);
+}
+    
   return JSON.parse(text);
 }
 

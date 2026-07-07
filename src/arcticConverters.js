@@ -135,7 +135,10 @@ export function convertArcticXML(xmlJson) {
    result
   ------------------------------*/
   return {
-
+    id:
+      ds?.["@_id"]
+      || "",
+      
     metadataIdentifier:
       ds?.["@_id"]
       || "",

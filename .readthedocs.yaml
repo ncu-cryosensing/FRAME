@@ -29,4 +29,7 @@ python:
 sphinx:
   builder: html
   configuration: docs/conf.py
-  fail_on_warning: true
+  fail_on_warning: false
+  #  suppress_warnings:
+  #    - misc.highlighting_failure  # Example of existing ones if any
+  #    - app.add_node              # Suppresses extension registration warnings

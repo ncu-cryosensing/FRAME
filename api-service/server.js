@@ -132,7 +132,7 @@ async function evaluateAIQuality(md) {
             "application/json"
         },
         body: JSON.stringify({
-          model: "openrouter/owl-alpha",
+          model: "openai/gpt-oss-20b:free",
           messages: [
             {
               role: "user",

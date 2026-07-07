@@ -57,11 +57,12 @@ object and produces:
 ### Which option should I choose?
 
 FRAME can be used in three different ways depending on your needs. 
-Option 1 (Docker) is the easiest way to get started because it requires only a single command and no manual installation of Node.js or project dependencies. It is recommended for users who simply want to run FRAME with minimal setup. The trade-off is that modifying the application source code requires entering the Docker container and rebuilding or committing a new image.
 
-Option 2 (Run from Source) is intended for users who want to customize or extend FRAME. This option requires installing Node.js, npm, and the project dependencies, but it provides direct access to the source code. Changes to the UI, validation logic, or other application components can be made and tested immediately during development.
+**Option 1** (Docker) is the easiest way to get started because it requires only a single command and no manual installation of Node.js or project dependencies. It is recommended for users who simply want to run FRAME with minimal setup. The trade-off is that modifying the application source code requires entering the Docker container and rebuilding or committing a new image.
 
-Option 3 (API Service) is designed for developers and data repository administrators who want to integrate FRAME into their own systems. Instead of using the built-in web interface, the API returns assessment results in JSON format, allowing organizations to build their own user interfaces, automate metadata validation workflows, or integrate FRAME with existing repository platforms.
+**Option 2** (Run from Source) is intended for users who want to customize or extend FRAME. This option requires installing Node.js, npm, and the project dependencies, but it provides direct access to the source code. Changes to the UI, validation logic, or other application components can be made and tested immediately during development.
+
+**Option 3** (API Service) is designed for developers and data repository administrators who want to integrate FRAME into their own systems. Instead of using the built-in web interface, the API returns assessment results in JSON format, allowing to build their own user interfaces, automate metadata validation workflows, or integrate FRAME with existing repository platforms.
 
 ## Prerequisites and Configuration
 
@@ -136,6 +137,13 @@ npm run start
 ```
 
 Open http://localhost:3006 in your browser.
+
+## Example
+
+Try the metadata assessment tool with the example below:
+
+https://taipidata.ncu.edu.tw/metadata-assessment/
+
 ## Dev team and contact 
 
 The NCU CryoSensing Team. https://www.ncu-cryosensing.org/

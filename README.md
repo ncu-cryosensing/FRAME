@@ -136,6 +136,11 @@ npm run start
 ```
 
 Open http://localhost:3006 in your browser.
+
+## License
+
+MIT License (See license file for details)
+
 ## Dev team and contact 
 
 The NCU CryoSensing Team. https://www.ncu-cryosensing.org/

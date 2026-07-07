@@ -3,33 +3,18 @@ build:
   os: ubuntu-24.04
   tools:
     python: "3.14"
-    # nodejs: "20"
+    # nodejs: "20"    # jupyter book >= 2.0
   jobs:
-    # post_install:
-      # Download and install Node.js (LTS version) into the build environment
-      # - curl -fsSL https://nodesource.com | sudo -E bash -
-      # - sudo apt-get install -y nodejs
-      # Ensure your python dependencies (including jupyter-book) install cleanly
-      # - pip install -r docs/requirements.txt
     pre_build:
-      # Generate the Sphinx configuration for
-      # this Jupyter Book so it builds.
-      - "jupyter-book config sphinx docs/"
+      - "jupyter-book config sphinx docs/"    # jupyter book < 2.0
 
 # Dependencies required to build your docs
 python:
    install:
    - requirements: docs/requirements.txt
 
-#     - method: pip
-#       path: .
-#       extra_requirements:
-#         - sphinx
-
+# Sphinx settings
 sphinx:
   builder: html
   configuration: docs/conf.py
   fail_on_warning: false
-  #  suppress_warnings:
-  #    - misc.highlighting_failure  # Example of existing ones if any
-  #    - app.add_node              # Suppresses extension registration warnings

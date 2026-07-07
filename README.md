@@ -138,16 +138,11 @@ npm run start
 
 Open http://localhost:3006 in your browser.
 
-## License
-
-MIT License (See license file for details)
-
 ## Example
 
 Try the metadata assessment tool with the example below:
 
 https://taipidata.ncu.edu.tw/metadata-assessment/
-
 
 ## License
 

@@ -815,7 +815,7 @@ arcticdata.io,
 
           onClick={() => {
 
-          setUrl(process.env.PUBLIC_URL + '/dummy-metadata3.json');
+          setUrl(process.env.PUBLIC_URL + 'dummy-metadata4.json');
 
             setTimeout(() => {
 
@@ -830,7 +830,29 @@ arcticdata.io,
           className="text-blue-600 underline ml-2"
 
         >
-          /dummy-metadata-2.json
+          fair-metadata.json,
+
+        </button>
+<button
+
+          onClick={() => {
+
+          setUrl(process.env.PUBLIC_URL + 'dummy-metadata3.json');
+
+            setTimeout(() => {
+
+              document
+                .querySelector('form')
+                .requestSubmit();
+
+            }, 100);
+
+          }}
+
+          className="text-blue-600 underline ml-2"
+
+        >
+          poor-metadata.json
 
         </button>
 

@@ -144,6 +144,11 @@ Try the metadata assessment tool with the example below:
 
 https://taipidata.ncu.edu.tw/metadata-assessment/
 
+## License
+
+MIT License (See license file for details)
+
+
 ## Dev team and contact 
 
 The NCU CryoSensing Team. https://www.ncu-cryosensing.org/

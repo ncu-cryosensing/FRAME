@@ -62,7 +62,7 @@ async function evaluateAIQuality(md) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "openrouter/owl-alpha",
+        model: "openai/gpt-oss-20b:free",
         messages: [
           {
             role: "user",
@@ -88,7 +88,7 @@ Return ONLY valid JSON:
     }
   );
 
-if (response.status === 429 || response.status === 401) {
+if (response.status === 429 || response.status === 401 || response.status === 404) {
 
   return {
 

@@ -9,7 +9,6 @@ import { convertZenodo }from './zenodoConverters';
 import { convertDataverse }from './dataverseConverters';
 import { convertArcticXML }from './arcticConverters';
 import { Navbar, Nav } from "react-bootstrap";
-import { GoogleGenAI } from "@google/genai";
 
 function App({ setPage }) {
 

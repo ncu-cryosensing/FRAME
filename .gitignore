@@ -2,6 +2,7 @@
 
 # documentation compiles
 _build
+conf.py
 
 # dependencies
 /node_modules

@@ -4,6 +4,12 @@ build:
   tools:
     python: "3.14"
   jobs:
+    post_install:
+      # Download and install Node.js (LTS version) into the build environment
+      - curl -fsSL https://nodesource.com | sudo -E bash -
+      - sudo apt-get install -y nodejs
+      # Ensure your python dependencies (including jupyter-book) install cleanly
+      # - pip install -r docs/requirements.txt
     pre_build:
       # Generate the Sphinx configuration for
       # this Jupyter Book so it builds.

@@ -72,7 +72,7 @@ async function evaluateAIQuality(md) {
     {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.REACT_APP_OPENROUTER_API_KEY}`,
+       "Authorization": `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -794,7 +794,7 @@ useEffect(() => {
 
           onClick={() => {
 
-          setUrl(process.env.PUBLIC_URL + 'dummy-metadata.json');
+          setUrl('dummy-metadata.json');
 
             setTimeout(() => {
 
@@ -864,7 +864,7 @@ arcticdata.io,
 
           onClick={() => {
 
-          setUrl(process.env.PUBLIC_URL + 'dummy-metadata4.json');
+          setUrl('fair-metadata.json');
 
             setTimeout(() => {
 
@@ -886,7 +886,7 @@ arcticdata.io,
 
           onClick={() => {
 
-          setUrl(process.env.PUBLIC_URL + 'dummy-metadata3.json');
+          setUrl('poor-metadata.json');
 
             setTimeout(() => {
 

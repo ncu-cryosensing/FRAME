@@ -78,7 +78,7 @@ https://openrouter.ai/keys
 Create a `.env` file in the project root and add your AI API key:
 
 ```env
-REACT_APP_OPENROUTER_API_KEY=your_api_key
+VITE_OPENROUTER_API_KEY=your_api_key
 ```
 
 Replace `your_api_key` with your actual API key.

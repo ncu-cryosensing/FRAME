@@ -71,3 +71,4 @@ App*copy*.js
 App*Copy*.js
 
 database.db
+package-lock.json

@@ -1,74 +1,55 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# documentation compiles
-_build
+# Documentation
+_build/
 conf.py
 
-# dependencies
-/node_modules
-/.pnp
+# Dependencies
+node_modules/
+.pnp
 .pnp.js
 
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Node modules
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
 # Build output
-dist/
 build/
+dist/
+coverage/
 
-# Local env files
+# Environment files
+.env*
+**/.env*
+!.env.example
+!**/.env.example
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+api-service/.env
 
 # Logs
 logs/
 *.log
-*.log.*
-pids/
 *.pid
-*.seed
 *.pid.lock
+*.seed
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# OS files
-.DS_Store
-Thumbs.db
+# Cache
+.cache/
+**/.cache/
+*.cache/
 
-# Editor folders
+# Jupyter
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# IDE
 .vscode/
 .idea/
 
-# Jupyter checkpoint
-.ipynb_checkpoints/
+# OS
+.DS_Store
+Thumbs.db
 
-# Generated files
-*.cache/
+# Generated database
+database.db
 
-# ignore copy
+# Ignore copy files
 App*copy*.js
 App*Copy*.js
-
-database.db
-package-lock.json

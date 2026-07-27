@@ -1,12 +1,16 @@
-const express = require("express");
-const db = require("./db");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
+import db from "./db.js";
 
 const app = express();
 app.use(express.json());
 app.use(cors({
     origin: "http://localhost:3000"
 }));
+
+app.get("/", (req, res) => {
+  res.redirect("/records");
+});
 
 /* Get all records */
 app.get("/records", (req, res) => {

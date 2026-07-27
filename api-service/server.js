@@ -38,8 +38,7 @@ const app = express();
 
 app.use(cors());
 
-app.use(express.json());
-
+app.use(express.json({ limit: "50mb" }));
 
 
 
@@ -121,6 +120,20 @@ async function evaluateAIQuality(md) {
    
   try {
 
+    const dbResponse = await fetch(`http://localhost:3005/records/${md.id}`);
+
+    if (dbResponse.ok) {
+        const data_base = await dbResponse.json();
+    
+        if (data_base && data_base.short_description === md.short_description && data_base.documentation === md.documentation && data_base.ai_result_short_description != null ) {
+            
+          return {
+            short_description: data_base.ai_result_short_description,
+            documentation: data_base.ai_result_documentation
+          };
+        }
+      }
+
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
       {
@@ -132,7 +145,7 @@ async function evaluateAIQuality(md) {
             "application/json"
         },
         body: JSON.stringify({
-          model: "openai/gpt-oss-20b:free",
+          model: `${process.env.MODEL}`,
           messages: [
             {
               role: "user",
@@ -176,6 +189,42 @@ Return ONLY valid JSON:
     const content =
       data.choices?.[0]
         ?.message?.content;
+
+      const aiResult = JSON.parse(content);
+
+      if (dbResponse.status === 404) {
+  // Record doesn't exist -> Create
+  await fetch("http://localhost:3005/records", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id_metadata: md.id,
+      ai_result_short_description: aiResult.short_description,
+      ai_result_documentation: aiResult.documentation,
+      short_description: md.short_description,
+      documentation: md.documentation
+    })
+  });
+} else if (dbResponse.ok) {
+  // Record exists -> Update
+  await fetch(`http://localhost:3005/records/${md.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      id_metadata: md.id,
+      ai_result_short_description: aiResult.short_description,
+      ai_result_documentation: aiResult.documentation,
+      short_description: md.short_description,
+      documentation: md.documentation
+    })
+  });
+} else {
+  throw new Error(`Database request failed: ${dbResponse.status}`);
+}
 
     return JSON.parse(content);
 
@@ -325,31 +374,56 @@ async function evaluateRule(
 
 
 
-async function checkMetadata(md) {
+ async function checkMetadata(md) {
 
-    const aiQuality =
-    await evaluateAIQuality(md);
+  // -------------------
+  // AI QUALITY
+  // -------------------
 
- 
+  const aiQuality =
+  await evaluateAIQuality(md);
 
+
+
+  // -------------------
+  // RESULT OBJECT
+  // -------------------
 
   const result = {
 
     totalChecks: 0,
 
+    totalScores: {
+      Findable: 0,
+      Accessible: 0,
+      Interoperable: 0,
+      Reusable: 0
+    },
+
     passed: 0,
-
     warnings: 0,
-
     failed: 0,
+    informational: 0,
+
+    passedScores: {
+      Findable: 0,
+      Accessible: 0,
+      Interoperable: 0,
+      Reusable: 0
+    },
 
     passedChecks: [],
-
     warningChecks: [],
-
-    failedChecks: []
+    failedChecks: [],
+    informationalCheck: []
 
   };
+
+
+
+  // -------------------
+  // ADD RESULT
+  // -------------------
 
   function addResult(
     condition,
@@ -361,9 +435,13 @@ async function checkMetadata(md) {
 
     result.totalChecks++;
 
+    result.totalScores[principle]++;
+
     if (condition) {
 
       result.passed++;
+
+      result.passedScores[principle]++;
 
       result.passedChecks.push({
 
@@ -374,39 +452,29 @@ async function checkMetadata(md) {
       });
 
     }
-
     else {
 
-      if (
-        level === "REQUIRED"
-      ) {
+      if (level === "REQUIRED") {
 
         result.failed++;
 
         result.failedChecks.push({
 
-          message:
-            failureMsg,
-
+          message: failureMsg,
           level,
-
           principle
 
         });
 
       }
-
       else {
 
         result.warnings++;
 
         result.warningChecks.push({
 
-          message:
-            failureMsg,
-
+          message: failureMsg,
           level,
-
           principle
 
         });
@@ -417,17 +485,15 @@ async function checkMetadata(md) {
 
   }
 
- 
 
-  for (
-    const rule
-    of rules.checks
-  ) {
 
-    const {
-      condition,
-      context
-    } =
+  // -------------------
+  // NORMAL RULES
+  // -------------------
+
+  for (const rule of rules.checks) {
+
+    const { condition, context } =
       await evaluateRule(
         md,
         rule,
@@ -447,23 +513,63 @@ async function checkMetadata(md) {
       );
 
     addResult(
-
       condition,
-
       successMsg,
-
       failureMsg,
-
       rule.level,
-
       rule.principle
-
     );
 
   }
 
-  return result;
 
+
+  
+
+
+  // -------------------
+  // INFO RULES
+  // -------------------
+
+  for (const rule of rules.info) {
+
+    const { condition } =
+      await evaluateRule(
+        md,
+        rule,
+        aiQuality
+      );
+
+    if (condition) {
+
+      result.informational++;
+
+      result.informationalCheck.push({
+
+        message:
+          replaceTemplate(
+            rule.message,
+            {
+              value:
+                md?.[rule.field] ||
+                "dataset"
+            }
+          ),
+
+        level: "INFO",
+
+        principle:
+          rule.principle
+
+      });
+
+    }
+
+  }
+
+
+
+  return result;
 }
 
 
@@ -636,7 +742,36 @@ app.get(
   }
 );
 
+app.post("/api/assess-dev", async (req, res) => {
+  try {
+    let raw = req.body;
 
+    if (!raw || Object.keys(raw).length === 0) {
+      return res.status(400).json({
+        success: false,
+        error: "JSON body is required"
+      });
+    }
+
+    // Zenodo
+    if (raw?.metadata?.creators) {
+      raw = convertZenodo(raw);
+    }
+
+    // Jalankan assessment
+    const assessment = await checkMetadata(raw);
+
+    res.json({
+      assessment
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message
+    });
+  }
+});
 
 
 const PORT =

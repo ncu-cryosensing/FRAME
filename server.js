@@ -132,6 +132,6 @@ app.delete("/records/:id", (req, res) => {
     }
 });
 
-app.listen(3005, () => {
+app.listen(3005, "0.0.0.0", () => {
     console.log("Server running at http://localhost:3005");
 });

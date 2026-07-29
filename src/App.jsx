@@ -42,8 +42,9 @@ const result = await response2.json();
       : raw;
 
   setDataset(md);
-
+      
   
+
   setData(result.assessment);
 }
 
@@ -85,14 +86,10 @@ const result = await response2.json();
   raw = await res.json();
 
   
-  if (raw?.metadataGeneratedBy) {
-
-    raw = raw;
-
-  }
+  
 
   // Zenodo
-  else if (raw?.metadata?.creators) {
+  if (raw?.metadata?.creators) {
 
     raw = convertZenodo(raw);
 
@@ -110,7 +107,7 @@ const result = await response2.json();
  
   else {
 
-  throw new Error('JSON_NOT_SUPPORTED');
+  raw=raw
 
 }
 
@@ -221,14 +218,10 @@ const result = await response2.json();
       if (file.name.endsWith('.json')) {
 
         raw = JSON.parse(text);
-        if (raw?.metadataGeneratedBy) {
 
-    raw = raw;
-
-  }
 
   // Zenodo
-  else if (raw?.metadata?.creators) {
+  if (raw?.metadata?.creators) {
 
     raw = convertZenodo(raw);
 
@@ -246,7 +239,7 @@ const result = await response2.json();
  
   else {
 
-  throw new Error('JSON_NOT_SUPPORTED');
+  raw=raw
 
 }
 
@@ -699,6 +692,22 @@ arcticdata.io,
                 </Tab>
 
               </Tabs>
+               
+
+{data.passed < 4 && (
+  <div className="mb-4 rounded-md border border-red-300 bg-red-50 p-3">
+    <p className="text-sm font-medium text-red-700">
+      Your metadata has fewer than 4 passed checks. Please generate the metadata again using the required format.
+    </p>
+
+    <button
+      onClick={() => setPage("generate")}
+      className="mt-2 rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 transition-colors"
+    >
+      Go to Generate JSON
+    </button>
+  </div>
+)}
 
             </>
 

@@ -14,15 +14,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # FIX 1: Updated from @v4 to @v6 to use the Node 24 runner
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
+      # FIX 2: Updated from @v4 to @v6 to use the Node 24 runner
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24
           cache: npm
 
+      # Your application runtime (Node 24) handles everything below safely
       - name: Install dependencies
         run: npm ci
 

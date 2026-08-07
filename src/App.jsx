@@ -8,7 +8,6 @@ import { XMLParser } from 'fast-xml-parser';
 import { convertZenodo }from './zenodoConverters';
 import { convertDataverse }from './dataverseConverters';
 import { convertArcticXML }from './arcticConverters';
-import { Navbar, Nav } from "react-bootstrap";
 
 function App({ setPage }) {
 
@@ -17,7 +16,7 @@ function App({ setPage }) {
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [selectedFile, setSelectedFile] = useState(null);
+  
   const fileInputRef = useRef(null);
     
     
@@ -104,12 +103,6 @@ const result = await response2.json();
 
   }
 
- 
-  else {
-
-  raw=raw
-
-}
 
 
 
@@ -200,7 +193,7 @@ const result = await response2.json();
 
   if (!file) return;
 
-  setSelectedFile(file);
+ 
 
   // clear URL input
   setUrl('');
@@ -237,11 +230,7 @@ const result = await response2.json();
   }
 
  
-  else {
-
-  raw=raw
-
-}
+  
 
 
 
@@ -351,7 +340,8 @@ useEffect(() => {
 
     fileInputRef.current.value = '';
 
-    setSelectedFile(null);
+   
+      
 
   }
 

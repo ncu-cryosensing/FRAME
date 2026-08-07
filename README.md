@@ -1,5 +1,7 @@
 # FRAME
 
+![Read-The-Docs-Badge](https://app.readthedocs.org/projects/frame-metadata-assessment/badge/)
+
 FRAME (**FAIR Review and Metadata Evaluation Engine**) is a web-based tool to assess the quality and completeness of the metadata for a given dataset based on the FAIR (Findable, Accessible, Interoperable, and Reusable) principles. With predefined criteria, FRAME accesses the metadata via a URL, reviews the content, validates its FAIRness, and finally provides quality scores for the metadata. This tool is designed for researchers and dataset administrators who need to host or use open datasets, as it provides a common basis for communication about data sharing, an important component of open science. 
 
 ## How it works
@@ -38,7 +40,7 @@ object and produces:
 
 <!-- > You can easily add or adjust checks inside `checkMetadata(md)`. -->
 
-## Features
+<!-- ## Features
 
 -   **URL-based fetch** of JSON or XML (`application/json`,
     `application/xml`, `text/xml`, or JSON served as `text/plain`)
@@ -46,12 +48,25 @@ object and produces:
 -   **FAIR checks** with per-principle tallies and overall counts
 -   **Visual summary** via `SummaryChart` and per-principle progress
     sections
--   **Tabbed checklists** (Passed, Failed, Warnings, Info)
+-   **Tabbed checklists** (Passed, Failed, Warnings, Info) -->
 
 <!-- The tool supports dynamic configuration using JSON, allowing users to easily customize validation rules without modifying the application source code. -->
 
 <!-- By externalizing validation logic into JSON files, the system becomes flexible, easily maintainable, adaptable to different metadata standards, and scalable for new validation requirements. -->
 
+## Quick start
+
+### Example server
+
+We provide an [example server](https://taipidata.ncu.edu.tw/metadata-assessment/) with FRAME running, so you can see how it works without installing or setting up on your local machines. Feel free to try it!
+
+
+
+
+
+
+
+### 
 
 # Usage
 ### Which option should I choose?
@@ -138,11 +153,7 @@ npm run start
 
 Open http://localhost:3006 in your browser.
 
-## Example
 
-Try the metadata assessment tool with the example below:
-
-https://taipidata.ncu.edu.tw/metadata-assessment/
 
 ## License
 

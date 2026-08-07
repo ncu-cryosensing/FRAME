@@ -2,8 +2,7 @@ import { Pie } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   ArcElement,
-  Tooltip,
-  Legend
+  Tooltip
 } from 'chart.js';
 
 // ✅ Register required elements for Pie Chart

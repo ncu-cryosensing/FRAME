@@ -90,10 +90,10 @@ Get an API key from OpenRouter:
 
 https://openrouter.ai/keys
 
-Create a `.env` file in the project root and add your AI API key:
+Create a `.env` file in the FRAME/api-service/.env and add your AI API key:
 
 ```env
-REACT_APP_OPENROUTER_API_KEY=your_api_key
+OPENROUTER_API_KEY=your_api_key
 ```
 
 Replace `your_api_key` with your actual API key.
@@ -133,25 +133,6 @@ Open http://localhost:3000 in your browser.
 ```bash
 npm run build
 ```
-## Option 3: Run API
-### Navigate to the API Service Directory
-
-```bash
-cd FRAME/api-service
-```
-### Install Dependencies
-
-```bash
-npm install
-```
-
-### Start the Development Server
-
-```bash
-npm run start
-```
-
-Open http://localhost:3006 in your browser.
 
 
 

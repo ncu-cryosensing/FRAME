@@ -12,6 +12,10 @@ export function convertZenodo(zenodoRaw) {
 const md1 = zenodoRaw;
   return {
 
+    id: zenodoRaw.id
+        ? `${zenodoRaw.id}`
+        : "",
+      
     title:
       md.title || "",
 

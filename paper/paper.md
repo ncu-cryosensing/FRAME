@@ -45,6 +45,13 @@ A recent publication is available here as an example: https://github.com/scikit-
 
 Workflow reference is available here: https://github.com/marketplace/actions/open-journals-pdf-generator
 
+Some references: 
+1. https://doi.org/10.1109/BigData59044.2023.10386850
+2. https://doi.org/10.1162/dint_a_00159
+3. https://doi.org/10.1145/2964909
+4. https://doi.org/10.1109/ACCESS.2021.3073455
+5. https://doi.org/10.1038/s41597-019-0184-5
+
 
 # Statement of need
 

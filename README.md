@@ -87,7 +87,7 @@ Replace `your_api_key` with your actual API key.
 ## Option 1: Run with Docker
 
 ```bash
-docker run -it -p 3000:3000 taipidata/metadata_assessment start
+sudo docker run -it -p 3000:3000 -p 3005:3005 -p 3006:3006 taipidata/frame start
 ```
 
 Open http://localhost:3000 in your browser.

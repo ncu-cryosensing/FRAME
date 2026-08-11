@@ -53,6 +53,9 @@ Some references:
 5. https://doi.org/10.1038/s41597-019-0184-5
 
 
+6. FUJI: https://www.f-uji.net/index.php?action=docs
+7. https://doi.org/10.1016/j.patter.2021.100370
+
 # Statement of need
 
 `FRAME` addresses the pain point for data repository managers. They need a way to assess data contributions. With `FRAME`, they can easily let the authors of data set know where and how to improve their dataset description and metadata using the quality assessment report by `FRAME`. This will help curate a high-quality data collection.

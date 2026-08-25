@@ -170,6 +170,7 @@ Return ONLY valid JSON:
         })
       }
     );
+      
 
     if (
       response.status === 401 ||
@@ -186,14 +187,21 @@ Return ONLY valid JSON:
     const data =
       await response.json();
 
-    const content =
-      data.choices?.[0]
-        ?.message?.content;
+    
 
-      const aiResult = JSON.parse(content);
+      const content = data.choices?.[0]?.message?.content;
+
+    
+    
+    const cleanContent = content
+      .replace(/```json\s*/i, "")
+      .replace(/```\s*$/i, "")
+      .trim();
+    
+    const aiResult = JSON.parse(cleanContent);
 
       if (dbResponse.status === 404) {
-  // Record doesn't exist -> Create
+
   await fetch("http://localhost:3005/records", {
     method: "POST",
     headers: {
@@ -226,7 +234,7 @@ Return ONLY valid JSON:
   throw new Error(`Database request failed: ${dbResponse.status}`);
 }
 
-    return JSON.parse(content);
+    return aiResult;
 
   }
 

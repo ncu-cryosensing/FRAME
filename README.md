@@ -70,9 +70,14 @@ If you would like to try FRAME on your local machine, then Docker should be the 
 
 To start the Docker container for FRAME, simply run
 
-<!-- ```bash
-docker run -it -p 3000:3000 taipidata/metadata_assessment start
-``` -->
+```bash
+sudo docker run -it -p 3000:3000 -p 3005:3005 -p 3006:3006 taipidata/frame start
+```
+
+<!-- port 3000 is the main port for the GUI
+port 3005 is for accessing AI assessment?
+port 3006 is to  
+Flexible -->
 
 After the container is initiated, open `http://localhost:3000` in your browser, and you will see the landing page of the FRAME user interface.
 

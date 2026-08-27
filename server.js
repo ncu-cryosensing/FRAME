@@ -46,6 +46,11 @@ app.post("/records", (req, res) => {
             id_metadata,
             ai_result_short_description,
             ai_result_documentation,
+            ai_index_page,
+            ai_doc_language,
+            ai_doc_references,
+            ai_data_retrieval,
+            ai_retrieval_protocol,
             short_description,
             documentation
         } = req.body;
@@ -55,14 +60,24 @@ app.post("/records", (req, res) => {
                 id_metadata,
                 ai_result_short_description,
                 ai_result_documentation,
+                ai_index_page,
+                ai_doc_language,
+                ai_doc_references,
+                ai_data_retrieval,
+                ai_retrieval_protocol,
                 short_description,
                 documentation
             )
-            VALUES (?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `).run(
             id_metadata,
             ai_result_short_description,
             ai_result_documentation,
+            ai_index_page,
+            ai_doc_language,
+            ai_doc_references,
+            ai_data_retrieval,
+            ai_retrieval_protocol,
             short_description,
             documentation
         );
@@ -72,10 +87,17 @@ app.post("/records", (req, res) => {
             id_metadata,
             ai_result_short_description,
             ai_result_documentation,
+            ai_index_page,
+            ai_doc_language,
+            ai_doc_references,
+            ai_data_retrieval,
+            ai_retrieval_protocol,
             short_description,
             documentation
         });
+        
     } catch (err) {
+        
         res.status(500).json({ error: err.message });
     }
 });
@@ -87,6 +109,11 @@ app.put("/records/:id", (req, res) => {
             id_metadata,
             ai_result_short_description,
             ai_result_documentation,
+            ai_index_page,
+            ai_doc_language,
+            ai_doc_references,
+            ai_data_retrieval,
+            ai_retrieval_protocol,
             short_description,
             documentation
         } = req.body;
@@ -97,6 +124,11 @@ app.put("/records/:id", (req, res) => {
                 id_metadata = ?,
                 ai_result_short_description = ?,
                 ai_result_documentation = ?,
+                ai_index_page = ?,
+            ai_doc_language = ?,
+            ai_doc_references = ?,
+            ai_data_retrieval = ?,
+            ai_retrieval_protocol = ?,
                 short_description = ?,
                 documentation = ?
             WHERE id_metadata = ?
@@ -104,6 +136,11 @@ app.put("/records/:id", (req, res) => {
             id_metadata,
             ai_result_short_description,
             ai_result_documentation,
+            ai_index_page,
+            ai_doc_language,
+            ai_doc_references,
+            ai_data_retrieval,
+            ai_retrieval_protocol,
             short_description,
             documentation,
             req.params.id

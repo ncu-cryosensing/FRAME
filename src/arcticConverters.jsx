@@ -1,9 +1,10 @@
-export function convertArcticXML(xmlJson) {
+export function convertArcticXML(url,xmlJson) {
 
   const ds =
     xmlJson?.eml?.dataset
     || xmlJson?.dataset
     || {};
+    const identifier = decodeURIComponent(url.split("/").pop()).replace(/^doi:/, "");
 
   /* -----------------------------
    helper: convert XML value -> text
@@ -136,15 +137,15 @@ export function convertArcticXML(xmlJson) {
   ------------------------------*/
   return {
     id:
-      ds?.["@_id"]
+      `doi:${identifier}`
       || "",
+      url_page: url,
       
     metadataIdentifier:
-      ds?.["@_id"]
+      `doi:${identifier}`
       || "",
 
-    doi:
-      "doi:10.18739/AXXXXXX",
+    doi:`https://doi.org/${identifier}`,
 
     title:
       getText(ds.title),

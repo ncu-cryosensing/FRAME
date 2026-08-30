@@ -2,7 +2,7 @@
 
 ![Read-The-Docs-Badge](https://app.readthedocs.org/projects/frame-metadata-assessment/badge/)
 
-FRAME (**FAIR Review and Metadata Evaluation Engine**) is a web-based tool to assess the quality and completeness of the metadata for a given dataset based on the FAIR (Findable, Accessible, Interoperable, and Reusable) principles. With predefined criteria, FRAME accesses the metadata via a URL, reviews the content, validates its FAIRness, and finally provides quality scores for the metadata. This tool is designed for researchers and dataset administrators who need to host or use open datasets, as it provides a common basis for communication about data sharing, an important component of open science. 
+FRAME (**FAIR Review and Metadata Evaluation Engine**) is a web-based tool to assess the quality and completeness of the metadata for a given **geospatial dataset** based on the FAIR (Findable, Accessible, Interoperable, and Reusable) principles. With predefined criteria, FRAME accesses the metadata via a URL, reviews the content, validates its FAIRness, and finally provides quality scores for the metadata. This tool is designed for researchers and dataset administrators who need to host or use open datasets, as it provides a common basis for communication about data sharing, an important component of open science. 
 
 ![FRAME-Logo](docs/FRAME-Logo.svg)
 
@@ -37,7 +37,7 @@ object and produces:
 -   Public landing page
 -   Data access URLs, including direct downloads and API access
 -   License
--   Spatial extent (spatial data only)
+-   Geospatial extent
 -   Cloud-based integrations, such as an online visualization portal or JupyterHub
 
 <!-- > You can easily add or adjust checks inside `checkMetadata(md)`. -->
@@ -108,22 +108,17 @@ Alternatively, you can install FRAME manually on your local machine. This requir
 
   Remember to replace `your_ai_api_key` with your actual API key.
 
-3. Get the source code of FRAME from the project repository, and navigate to the project folder:
+3. Get the source code of FRAME from the project repository, navigate to the project folder, and install dependencies:
 
   ```bash
   git clone https://github.com/ncu-cryosensing/FRAME.git
   cd FRAME
-  ```
-
-4. Install dependencies and start the FRAME server:
-
-  ```bash
   npm install
-  npm run start
   ```
 
-  Once the server is activated, open your browser and go to `http://localhost:3000`. You will see the landing page of the FRAME user interface.
+#### Start the web tool
 
+If all dependencies are installed, you can start the FRAME server by executing `npm run start` in the FRAME folder. Once the server is activated, open your browser and go to `http://localhost:3000`. You will see the landing page of the FRAME user interface.
 
 <!-- ### Build for Production
 
@@ -139,12 +134,19 @@ To use the FRAME API, simply follow the instructions above and get FRAME using D
 
 <!-- , allowing them to build their own user interfaces, automate metadata validation workflows, or integrate FRAME with existing repository platforms. -->
 
-## License
+## License and citation guide
 
 MIT License. See the license file for details.
 
+We appreciate it if you could consider citing FRAME using this entry as a reference:
+
+Panuntun, I. A., Zheng, W., & Ni, C.-F. (2025). TaiPI Data Repository: An Asia-Based, Community-Driven Platform Leveraging Emerging Technologies for Open Polar Science. 2025 AGU Fall Meeting (December 15-19).
+
 ## Dev team and contact 
 
-For development questions or potential collaboration, feel free to open an issue or reach out to the CryoSensing Team at National Central University. https://www.ncu-cryosensing.org/
+FRAME is developed by the [CryoSensing Team](https://www.ncu-cryosensing.org/) at National Central University. 
 
-Pull Requests to the dev branch are also welcome!
+- Main developer: Ilham Adi Panuntun (GitHub: @ilham-ap)
+- Team supervisor: Whyjay Zheng (GitHub: @whyjz)
+
+For development questions or potential collaboration, feel free to open an issue or reach out to us using [this contact form](https://www.ncu-cryosensing.org/en/contact). This repository is also open to external pull requests.

@@ -33,7 +33,7 @@ export async function evaluateAIQuality(md) {
     }
 
  const apiEndpoint = process.env.ENDPOINT || "https://taipidata.ncu.edu.tw/ai/v1/chat/completions";
- const model = process.env.MODEL || "ag/gemini-3.7-flash-high";
+ const model = process.env.MODEL || "free-ai";
       
  const response = await fetch(
       apiEndpoint,
@@ -62,16 +62,16 @@ ${md.short_description || ""}
 Documentation:
 ${md.documentation || ""}
 
-Whether the host repository that is indexed by search engine?
+Is the host repository indexed by search engines?
 ${md.url_page || ""}
 
-documentation is provided using a language with a formal specification?
-${md.documentation || ""}
+Does the documentation use a language with a formal specification?
+no documentation return false
 
-whether the description/documentation contains any references?
-${md.documentation || ""}
+Does the description/documentation contain any scientific references or citations?
+no documentation return false
 
-Whether the repository / data set retrieval needs authorization before access?
+Does access to the repository or dataset require authorization?
 ${md.url_page || ""}
 
 What the dataset retrieval protocol ?

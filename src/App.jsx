@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect, useState, useRef } from 'react';
-import { Container, Tabs, Tab } from 'react-bootstrap';
+import { Container, Tabs, Tab, Spinner } from 'react-bootstrap';
 import SummaryChart from './components/SummaryChart';
 import AssessmentSection from './components/AssessmentSection';
 import CheckList from './components/CheckList';
@@ -486,24 +486,37 @@ arcticdata.io,
       >
 
        <input
-  type="text"
-  placeholder="Enter JSON URL"
-  value={url}
-  onChange={(e) => setUrl(e.target.value)}
-  className="border p-2"
-/>
+          type="text"
+          placeholder="Enter JSON URL"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          disabled={loading}
+          className="border p-2"
+        />
         <input
-  ref={fileInputRef}
-  type="file"
-  accept=".json,.xml"
-  onChange={handleFileUpload}
-  className="border p-2"
-/>
+          ref={fileInputRef}
+          type="file"
+          accept=".json,.xml"
+          onChange={handleFileUpload}
+          disabled={loading}
+          className="border p-2"
+        />
 
         <button
           type="submit"
-          className="bg-blue-600 text-white p-2 rounded"
+          disabled={loading}
+          className="bg-blue-600 text-white p-2 rounded flex items-center justify-center gap-2 disabled:opacity-60"
         >
+
+          {loading && (
+            <Spinner
+              as="span"
+              animation="border"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+          )}
 
           {loading
             ? "Assessing..."
@@ -512,6 +525,8 @@ arcticdata.io,
         </button>
 
       </form>
+
+     
 
       {error && (
   <div className="text-red-600">

@@ -16,6 +16,8 @@ function App({ setPage }) {
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [reAssess, setReAssess] = useState(false);
+  const [hasCachedAi, setHasCachedAi] = useState(false);
   
   const fileInputRef = useRef(null);
     
@@ -23,7 +25,46 @@ function App({ setPage }) {
   
   async function processMetadata(raw) {
 
-   const response2 = await fetch("http://localhost:3006/api/assess-dev", {
+  // check whether an AI result already exists in the database
+  try {
+
+    const cacheRes = await fetch("http://localhost:3006/api/ai-cache-check", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(raw)
+    });
+
+    if (cacheRes.ok) {
+
+      const cacheData = await cacheRes.json();
+
+      setHasCachedAi(cacheData.cached === true);
+
+      if (!cacheData.cached) {
+        setReAssess(false);
+      }
+
+    }
+    else {
+
+      setHasCachedAi(false);
+      setReAssess(false);
+
+    }
+
+  }
+  catch {
+
+    setHasCachedAi(false);
+    setReAssess(false);
+
+  }
+
+   const response2 = await fetch(
+    `http://localhost:3006/api/assess-dev?reassess=${reAssess ? "true" : "false"}`,
+    {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
@@ -62,6 +103,8 @@ const result = await response2.json();
     setError('');
     setLoading(true);
     setData(null);
+    setHasCachedAi(false);
+    setReAssess(false);
 
     try {
 
@@ -201,6 +244,8 @@ const result = await response2.json();
 
   setError('');
   setLoading(true);
+  setHasCachedAi(false);
+  setReAssess(false);
 
 
     try {
@@ -526,7 +571,31 @@ arcticdata.io,
 
       </form>
 
-     
+      
+
+      {hasCachedAi && (
+        <div >
+          
+
+          <label className="flex items-center gap-2 mb-1 cursor-pointer">
+            <input
+              type="hidden"
+              name="reAssessOption"
+              checked={!reAssess}
+              onChange={() => setReAssess(false)}
+            />
+          </label>
+
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="hidden"
+              name="reAssessOption"
+              checked={reAssess}
+              onChange={() => setReAssess(true)}
+            />
+          </label>
+        </div>
+      )}
 
       {error && (
   <div className="text-red-600">

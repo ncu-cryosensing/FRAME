@@ -6,8 +6,8 @@ import { isValidUrl } from "./isValidUrl.js";
 import { isValidDownloadUrl } from "./isValidDownloadUrl.js";
 
 
-export async function checkMetadata(md, rules) {
- const aiQuality = await evaluateAIQuality(md);
+export async function checkMetadata(md, rules, reAssess = false) {
+ const aiQuality = await evaluateAIQuality(md, reAssess);
 const validurl = await isValidUrl(md.url_page, md.title)
 const validdownload = await isValidDownloadUrl(md.url_download)
 

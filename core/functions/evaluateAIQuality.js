@@ -1,13 +1,38 @@
 import fetch from "node-fetch";
 
-export async function evaluateAIQuality(md) {
+export async function hasCachedAiResult(md) {
   try {
-      
+
     const dbResponse = await fetch(
-      `http://127.0.0.1:3005/records/${md.id}`
+      `http://127.0.0.1:3005/records/${encodeURIComponent(md.id)}`
     );
 
     if (dbResponse.ok) {
+      const data_base = await dbResponse.json();
+
+      return !!(
+        data_base &&
+        data_base.short_description === md.short_description &&
+        data_base.documentation === md.documentation &&
+        data_base.ai_result_short_description != null
+      );
+    }
+
+  } catch (error) {
+    // database unreachable -> treat as no cached result
+  }
+
+  return false;
+}
+
+export async function evaluateAIQuality(md, reAssess = false) {
+  try {
+      
+    const dbResponse = await fetch(
+      `http://127.0.0.1:3005/records/${encodeURIComponent(md.id)}`
+    );
+
+    if (dbResponse.ok && !reAssess) {
       const data_base = await dbResponse.json();
 
       if (
@@ -154,7 +179,7 @@ Return ONLY valid JSON:
       );
     } else if (dbResponse.ok) {
       await fetch(
-        `http://127.0.0.1:3005/records/${md.id}`,
+        `http://127.0.0.1:3005/records/${encodeURIComponent(md.id)}`,
         {
           method: "PUT",
 
@@ -172,8 +197,8 @@ Return ONLY valid JSON:
               aiResult.documentation,
 
             ai_index_page:  aiResult.index_page,
-            ai_doc_language: aiResult.index_page,
-            a_doc_references: aiResult.index_page,
+            ai_doc_language: aiResult.doc_language,
+            ai_doc_references: aiResult.doc_references,
             ai_data_retrieval: aiResult.data_retrieval ,
             ai_retrieval_protocol: aiResult.retrieval_protocol ,
 

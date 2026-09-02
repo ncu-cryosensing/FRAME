@@ -1,0 +1,289 @@
+{
+  "checks": [
+
+    {
+      "id": "title_word_count",
+      "field": "title",
+      "type": "wordCount",
+      "min": 4,
+      "level": "REQUIRED",
+      "principle": "Findable",
+      "successMsg": "The title contains {count} words. Meets the minimum recommended value of 4.",
+      "failureMsg": "The title contains {count} words. Minimum required is 4."
+    },
+
+    {
+      "id": "creator_exists",
+      "field": "authors",
+      "type": "arrayNotEmpty",
+      "level": "REQUIRED",
+      "principle": "Findable",
+      "successMsg": "One creator is present.",
+      "failureMsg": "Creator is missing."
+    },
+
+    {
+      "id": "creator_identifier_exists",
+      "field": "authors",
+      "type": "arrayNotEmpty",
+      "level": "REQUIRED",
+      "principle": "Findable",
+      "successMsg": "{x_orcid} out of {x_people} people have provided an ORCID.",
+      "failureMsg": "Creator identifier is missing."
+    },
+
+    {
+      "id": "creator_affiliation_exists",
+      "field": "authors",
+      "type": "arrayNotEmpty",
+      "level": "REQUIRED",
+      "principle": "Findable",
+      "successMsg": "Creator affiliation is present.",
+      "failureMsg": "Creator affiliation is missing."
+    },
+
+    {
+      "id": "publication_date_exists",
+      "field": "publicationDate",
+      "type": "exists",
+      "level": "REQUIRED",
+      "principle": "Findable",
+      "successMsg": "A publication date is present.",
+      "failureMsg": "A publication date is missing."
+    },
+
+    {
+      "id": "doi_exists_findable",
+      "field": "doi",
+      "type": "exists",
+      "level": "REQUIRED",
+      "principle": "Findable",
+      "successMsg": "The digital object identifier {value} is present.",
+      "failureMsg": "Digital object identifier is missing."
+    },
+
+    {
+      "id": "short_description_word_count",
+      "field": "short_description",
+      "type": "wordCount",
+      "min": 20,
+      "level": "REQUIRED",
+      "principle": "Findable",
+      "successMsg": "Short Description has {count} words. Meets the minimum recommended value of 20.",
+      "failureMsg": "Short Description has {count} words. Minimum recommended is 20."
+    },
+    
+
+    {
+      "id": "documentation_word_count_findable",
+      "field": "documentation",
+      "type": "wordCount",
+      "min": 100,
+      "level": "REQUIRED",
+      "principle": "Findable",
+      "successMsg": "Full description has {count} words. Meets the minimum recommended value of 100.",
+      "failureMsg": "Full Description has {count} words. Minimum recommended is 100."
+    },
+
+    {
+      "id": "spatial_extent_exists",
+      "field": "spatialExtent",
+      "type": "exists",
+      "level": "OPTIONAL",
+      "principle": "Findable",
+      "successMsg": "A spatial extent is present.",
+      "failureMsg": "The spatial extent is missing."
+    },
+{
+    "id": "index_page_ai_quality",
+    "field": "index_page",
+    "type": "aiQuality3",
+    "expected": "Good",
+    "level": "OPTIONAL",
+    "principle": "Findable",
+    "successMsg": "[AI check] Host repository that is indexed by search engine.",
+    "failureMsg": "[AI check] Host repository that is not indexed by search engine."
+  },
+
+
+    
+    {
+      "id": "doi_exists_accessible",
+      "field": "doi",
+      "type": "exists",
+      "level": "REQUIRED",
+      "principle": "Accessible",
+      "successMsg": "The digital object identifier {value} is valid, accessible, and correctly points to the dataset.",
+      "failureMsg": "No digital object identifier {value} is invalid, inaccessible, or does not correctly point to the dataset."
+    },
+
+    {
+      "id": "landing_page_url",
+      "field": "url_page",
+      "type": "valid",
+      "level": "REQUIRED",
+      "principle": "Accessible",
+      "successMsg": "A resource landing page URL {validvalue} is valid, accessible, and correctly points to the dataset.",
+      "failureMsg": "The resource landing page URL {validvalue} is invalid, inaccessible, or does not correctly point to the dataset."
+    },
+
+    {
+      "id": "download_url",
+      "field": "url_download",
+      "type": "validdownload",
+      "level": "REQUIRED",
+      "principle": "Accessible",
+      "successMsg": "A downloading url {urlvalue} is accessible.",
+      "failureMsg": "A downloading url {urlvalue} is inaccessible."
+    },
+
+    {
+    "id": "doc_language_ai_quality",
+    "field": "doc_language",
+    "type": "aiQuality3",
+    "expected": "Good",
+    "level": "OPTIONAL",
+    "principle": "Interoperable",
+    "successMsg": "[AI check]Full description is provided using a language with a formal specification.",
+    "failureMsg": "[AI check] Full description is not provided using a language with a formal specification.."
+  },
+  {
+    "id": "doc_references_ai_quality",
+    "field": "doc_references",
+    "type": "aiQuality3",
+    "expected": "Good",
+    "level": "OPTIONAL",
+    "principle": "Interoperable",
+    "successMsg": "[AI check] Full description contains references.",
+    "failureMsg": "[AI check] Full description no references."
+  },
+
+      {
+      "id": "short_description_ai_quality",
+      "field": "short_description",
+      "type": "aiQuality1",
+      "expected": "Good",
+      "level": "OPTIONAL",
+      "principle": "Reusable",
+      "successMsg": "[AI check] {aiResult1}.",
+      "failureMsg": "[AI check] {aiResult1}."
+    },
+    {
+      "id": "documentation_ai_quality",
+      "field": "documentation",
+      "type": "aiQuality2",
+      "expected": "Good",
+      "level": "OPTIONAL",
+      "principle": "Reusable",
+      "successMsg": "[AI check] {aiResult2}.",
+      "failureMsg": "[AI check] {aiResult2}."
+    },
+
+  
+  
+
+{
+      "id": "corresponding_author_exists",
+      "field": "corresponding_author",
+      "type": "exists",
+      "level": "REQUIRED",
+      "principle": "Reusable",
+      "successMsg": "The corresponding author {email} is present.",
+      "failureMsg": "The corresponding author is missing."
+    },
+
+
+    {
+      "id": "license_exists",
+      "field": "license",
+      "type": "exists",
+      "level": "REQUIRED",
+      "principle": "Reusable",
+      "successMsg": "The document is licensed with Creative Commons {value}.",
+      "failureMsg": "No resource license is present."
+    },
+
+    {
+      "id": "award_exists",
+      "field": "award",
+      "type": "exists",
+      "level": "OPTIONAL",
+      "principle": "Reusable",
+      "successMsg": "At least one award number is present.",
+      "failureMsg": "No award number is present."
+    },
+      {
+      "id": "funding_exists",
+      "field": "funding",
+      "type": "exists",
+      "level": "OPTIONAL",
+      "principle": "Reusable",
+      "successMsg": "At least one funding agency is present.",
+      "failureMsg": "No funding agency is present."
+    }
+
+  ],
+
+  "info": [
+    
+      {
+      "id": "repository_name_exist",
+      "field": "repository_name",
+      "type": "exists",
+      "principle": "Findable",
+      "message": "Name of the repository {value}."
+    },
+      {
+      "id": "data_retrieval",
+      "field": "url_page",
+      "type": "exists",
+      "principle": "Accessible",
+     "message": "{auth}"
+    },
+      {
+      "id": "retrieval_protocol",
+      "field": "url_page",
+      "type": "exists",
+      "principle": "Accessible",
+     "message": "{protocol}"
+    },
+      {
+      "id": "metadata_identifier_exists",
+      "field": "metadataIdentifier",
+      "type": "exists",
+      "principle": "Findable",
+      "message": "The metadata identifier {value}"
+    },
+      {
+      "id": "interactive_map_optional",
+      "field": "url_map",
+      "type": "exists",
+      "principle": "Accessible",
+      "message": "Interactive map is present."
+    },
+
+    {
+      "id": "taipihub_optional_accessible",
+      "field": "url_taipihub",
+      "type": "exists",
+      "principle": "Accessible",
+      "message": "TaipiHUB is present."
+    },
+
+      {
+      "id": "api_endpoint_exists_accessible",
+      "field": "url_api",
+      "type": "exists",
+      "principle": "Accessible",
+      "message": "API end point is present."
+    },
+       
+      {
+      "id": "resourcetype_exists",
+      "field": "resourceType",
+      "principle": "Reusable",
+      "type": "exists",
+      "message": "The resource type is: {value}"
+    }
+  ]
+}

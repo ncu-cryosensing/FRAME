@@ -6,22 +6,22 @@ compatible with FAIR checker
 */
 
 export function convertZenodo(zenodoRaw) {
+  const md = zenodoRaw.metadata || zenodoRaw;
+  const md1 = zenodoRaw;
 
-  const md =
-    zenodoRaw.metadata || zenodoRaw;
-const md1 = zenodoRaw;
-    
   return {
     id: zenodoRaw.id
-        ? `${zenodoRaw.id}`
-        : "",
-      
+      ? `${zenodoRaw.id}`
+      : "",
+
+    url_page: `https://zenodo.org/records/${zenodoRaw.id}`,
+
     title:
       md.title || "",
 
     short_description:
       md.description
-        ?.replace(/<[^>]+>/g, '')
+        ?.replace(/<[^>]+>/g, "")
         .trim() || "",
 
     publicationDate:
@@ -33,45 +33,35 @@ const md1 = zenodoRaw;
         : "",
 
     doi:
-      md.doi || "",
+      md.doi
+        ? `https://doi.org/${md.doi}`
+        : "",
 
     authors:
-      (md.creators || [])
-        .map(a => ({
+      (md.creators || []).map((a) => ({
+        name: a.name,
 
-          name:
-            a.name,
+        affiliation: a.affiliation,
 
-          affiliation:
-            a.affiliation,
-
-          orcid:
-            a.orcid
-
-        })),
+        orcid: a.orcid,
+      })),
 
     creators:
-      (md.creators || [])
-        .map(a => ({
+      (md.creators || []).map((a) => ({
+        name: a.name,
 
-          name:
-            a.name,
+        affiliation: a.affiliation,
 
-          affiliation:
-            a.affiliation,
-
-          orcid:
-            a.orcid
-
-        })),
+        orcid: a.orcid,
+      })),
 
     keywords:
       md.keywords || [],
 
     license:
-      md.license?.id
-      || md.license
-      || "unknown",
+      md.license?.id ||
+      md.license ||
+      "unknown",
 
     language:
       md.language || "",
@@ -81,22 +71,22 @@ const md1 = zenodoRaw;
 
     resourceType:
       md.resource_type?.title || "",
+
     url_api:
       md1.links?.self || "",
+
     url_download:
-      md1.files[0].links.self || "",
+      md1.files?.[0]?.links?.self || "",
+
     award:
-  md.grants
-    ?.map(g => g.code)
-    .join("; ")
-  || "",
+      md.grants
+        ?.map((g) => g.code)
+        .join("; ") || "",
 
     publisher:
       "Zenodo",
 
     version:
-      "1.0"
-
+      "1.0",
   };
-
 }

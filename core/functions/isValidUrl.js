@@ -79,7 +79,7 @@ const identifier = UrlPage.split("persistentId=")[1];
 
       
   } catch (error) {
-    console.error("URL validation failed:", error);
+    console.error("URL validation failed:", error.message);
 
     return {
       validUrl: false,

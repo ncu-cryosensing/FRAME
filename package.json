@@ -11,7 +11,9 @@
     "dev:db": "node server.js",
     "build": "vite build",
     "preview": "concurrently \"node server.js\" \"npm run dev:api\" \"vite preview\"",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
@@ -41,6 +43,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.5",
     "@vitejs/plugin-react": "^6.0.3",
+    "@vitest/coverage-v8": "^4.1.11",
     "autoprefixer": "^10.5.2",
     "eslint": "^9.39.5",
     "eslint-plugin-react": "^7.37.5",

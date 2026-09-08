@@ -114,7 +114,7 @@
       "level": "REQUIRED",
       "principle": "Accessible",
       "successMsg": "The digital object identifier {value} is valid, accessible, and correctly points to the dataset.",
-      "failureMsg": "No digital object identifier {value} is invalid, inaccessible, or does not correctly point to the dataset."
+      "failureMsg": "The digital object identifier {value} is invalid, inaccessible, or does not correctly point to the dataset."
     },
 
     {
@@ -144,7 +144,7 @@
     "expected": "Good",
     "level": "OPTIONAL",
     "principle": "Interoperable",
-    "successMsg": "[AI check]Full description is provided using a language with a formal specification.",
+    "successMsg": "[AI check] Full description is provided using a language with a formal specification.",
     "failureMsg": "[AI check] Full description is not provided using a language with a formal specification.."
   },
   {
@@ -213,8 +213,8 @@
       "failureMsg": "No award number is present."
     },
       {
-      "id": "funding_exists",
-      "field": "funding",
+      "id": "fundername_exists",
+      "field": "fundername",
       "type": "exists",
       "level": "OPTIONAL",
       "principle": "Reusable",
@@ -238,14 +238,14 @@
       "field": "url_page",
       "type": "exists",
       "principle": "Accessible",
-     "message": "{auth}"
+     "message": "[AI check] {auth}"
     },
       {
       "id": "retrieval_protocol",
       "field": "url_page",
       "type": "exists",
       "principle": "Accessible",
-     "message": "{protocol}"
+     "message": "[AI check] {protocol}"
     },
       {
       "id": "metadata_identifier_exists",

@@ -96,8 +96,8 @@ no documentation return false
 Does the description/documentation contain any scientific references or citations?
 no documentation return false
 
-Does access to the repository or dataset require authorization?
-${md.url_page || ""}
+Does access to download dataset require authorization?
+${md.url_download || ""}
 
 What the dataset retrieval protocol ?
 ${md.url_page || ""}
@@ -220,7 +220,7 @@ Return ONLY valid JSON:
   } catch (error) {
     console.error(
       "AI quality evaluation failed:",
-      error
+      error.message
     );
 
     return {

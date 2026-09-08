@@ -3,10 +3,22 @@ export function convertArcticXML(url, xmlJson) {
     xmlJson?.eml?.dataset ||
     xmlJson?.dataset ||
     {};
-
+        
   const identifier = decodeURIComponent(
     url.split("/").pop()
-  ).replace(/^doi:/, "");
+  ).replace(/^doi:/, "") || "";
+
+    let doi
+    let id
+    
+    if (!identifier){
+        doi = ""
+        id = xmlJson["@_packageId"]
+    }
+    else {
+        doi= `https://doi.org/${identifier}`
+        id= `doi:${identifier}`
+    }
 
   /* -----------------------------
    helper: convert XML value -> text
@@ -129,17 +141,22 @@ export function convertArcticXML(url, xmlJson) {
       ds.project?.award?.awardNumber
   );
 
+    const fundername = getText(
+    ds.project?.award?.[0]?.funderName ||
+      ds.project?.award?.funderName
+  );
+
   /* -----------------------------
    result
   ------------------------------*/
   return {
-    id: `doi:${identifier}`,
+    id: id,
 
     url_page: url,
 
-    metadataIdentifier: `doi:${identifier}`,
+    metadataIdentifier: id,
 
-    doi: `https://doi.org/${identifier}`,
+    doi: doi,
 
     title: getText(ds.title),
 
@@ -168,12 +185,13 @@ export function convertArcticXML(url, xmlJson) {
     ),
 
     award,
+    fundername,
 
     url_download:
-      "https://arcticdata.io/metacat/d1/mn/v2/packages/application%2Fbagit-1.0/resource_map",
+      `https://arcticdata.io/metacat/d1/mn/v2/packages/application%2Fbagit-1.0/resource_map_doi:${identifier}`,
 
     url_api:
-      "https://arcticdata.io/metacat/d1/mn/v2/object/",
+      `https://arcticdata.io/metacat/d1/mn/v2/object/doi:${identifier}`,
 
     accessLevel: "open",
 

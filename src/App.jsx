@@ -18,7 +18,7 @@ function App({ setPage }) {
   const [error, setError] = useState('');
   const [reAssess, setReAssess] = useState(false);
   const [hasCachedAi, setHasCachedAi] = useState(false);
-  
+  const [pendingMetadata, setPendingMetadata] = useState(null);
   const fileInputRef = useRef(null);
     
     
@@ -95,16 +95,42 @@ const result = await response2.json();
 
     e.preventDefault();
 
-    if (!url.trim()) {
-      setError('Enter URL or upload file');
-      return;
-    }
-
     setError('');
     setLoading(true);
     setData(null);
     setHasCachedAi(false);
     setReAssess(false);
+
+    if (dataset && !url.trim()) {
+
+      setLoading(true);
+
+      try {
+
+        await processMetadata(
+          dataset,
+          true
+        );
+
+      } catch (err) {
+
+        setError(err.message);
+
+      } finally {
+
+        setLoading(false);
+
+      }
+
+      return;
+    }
+
+    if (!url.trim()) {
+      setError('Enter URL or upload file');
+      return;
+    }
+
+    
 
     try {
 
@@ -158,10 +184,9 @@ const result = await response2.json();
         const xmlDoc =
           new DOMParser()
             .parseFromString(text, 'application/xml');
-
         const parserError =
           xmlDoc.getElementsByTagName('parsererror')[0];
-
+       
         if (parserError)
           throw new Error('Invalid XML');
 
@@ -239,13 +264,14 @@ const result = await response2.json();
 
  
 
-  // clear URL input
-  setUrl('');
+  
+setUrl('');
 
-  setError('');
-  setLoading(true);
-  setHasCachedAi(false);
-  setReAssess(false);
+setError('');
+setLoading(true);
+setData(null);
+setHasCachedAi(false);
+setReAssess(false);
 
 
     try {
@@ -313,7 +339,7 @@ const result = await response2.json();
   if (jsonObj["eml:eml"]?.dataset) {
 
     raw =
-      convertArcticXML(jsonObj["eml:eml"]);
+      convertArcticXML(url,jsonObj["eml:eml"]);
 
     
 

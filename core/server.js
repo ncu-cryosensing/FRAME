@@ -25,7 +25,7 @@ import { hasCachedAiResult }
   from "./functions/evaluateAIQuality.js";
 
 
-dotenv.config();
+dotenv.config({ quiet: true });
  const rules =
   JSON.parse(
     fs.readFileSync(

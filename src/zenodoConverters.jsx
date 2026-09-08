@@ -82,6 +82,11 @@ export function convertZenodo(zenodoRaw) {
       md.grants
         ?.map((g) => g.code)
         .join("; ") || "",
+    
+      fundername:
+      md.grants
+        ?.map((g) => g.funder.name)
+        .join("; ") || "",
 
     publisher:
       "Zenodo",

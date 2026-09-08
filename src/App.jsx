@@ -18,7 +18,6 @@ function App({ setPage }) {
   const [error, setError] = useState('');
   const [reAssess, setReAssess] = useState(false);
   const [hasCachedAi, setHasCachedAi] = useState(false);
-  const [pendingMetadata, setPendingMetadata] = useState(null);
   const fileInputRef = useRef(null);
     
     

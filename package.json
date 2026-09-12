@@ -7,7 +7,7 @@
     "start": "concurrently \"node server.js\" \"npm run dev:api\" \"vite\"",
     "dev": "concurrently \"node server.js\" \"npm run dev:api\" \"vite\"",
     "dev:vite": "vite",
-    "dev:api": "cd api-service && node server.js",
+    "dev:api": "cd core && node server.js",
     "dev:db": "node server.js",
     "build": "vite build",
     "preview": "concurrently \"node server.js\" \"npm run dev:api\" \"vite preview\"",

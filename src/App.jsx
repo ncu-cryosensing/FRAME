@@ -110,6 +110,7 @@ const result = await response2.json();
       else if (ct.includes('xml') || url.endsWith('.xml')) {
 
         const text = await res.text();
+          
 
         const xmlDoc =
           new DOMParser()
@@ -133,7 +134,7 @@ const result = await response2.json();
   if (jsonObj["eml:eml"]?.dataset) {
 
     raw =
-      convertArcticXML(jsonObj["eml:eml"]);
+      convertArcticXML(url,jsonObj["eml:eml"]);
 
     
 
@@ -402,7 +403,7 @@ Zenodo,
 </button>
 
 <button
-  onClick={() => {setUrl('https://dataverse.harvard.edu/api/datasets/:persistentId?persistentId=doi:10.7910/DVN/TJCLKP')
+  onClick={() => {setUrl('https://dataverse.harvard.edu/api/datasets/:persistentId?persistentId=doi:10.7910/DVN/ES8GTH')
                  setTimeout(() => {
 
               document
@@ -635,10 +636,10 @@ arcticdata.io,
 
                 <Tab
                   eventKey="passed"
-                  title={`Passed ${data.passed}`}
+                  title={`✅ Passed ${data.passed}`}
                 >
 
-                  <CheckList
+                  <CheckList title="Passed Checks"
                     items={data.passedChecks}
                     color="#4CAF50"
                   />
@@ -647,10 +648,10 @@ arcticdata.io,
 
                 <Tab
                   eventKey="failed"
-                  title={`Failed ${data.failed}`}
+                  title={`❌ Failed ${data.failed}`}
                 >
 
-                  <CheckList
+                  <CheckList title="Failed Checks"
                     items={data.failedChecks}
                     color="#F44336"
                   />
@@ -659,10 +660,10 @@ arcticdata.io,
 
                 <Tab
                   eventKey="warnings"
-                  title={`Warnings ${data.warnings}`}
+                  title={`⚠️ Warnings ${data.warnings}`}
                 >
 
-                  <CheckList
+                  <CheckList title="Warning Checks"
                     items={data.warningChecks}
                     color="#FFC107"
                   />
@@ -671,10 +672,10 @@ arcticdata.io,
 
                 <Tab
                   eventKey="info"
-                  title={`Info ${data.informational}`}
+                  title={`ℹ️ Info ${data.informational}`}
                 >
 
-                  <CheckList
+                  <CheckList title="Informational"
                     items={data.informationalCheck}
                     color="#2196F3"
                   />

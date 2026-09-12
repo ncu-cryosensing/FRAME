@@ -15,7 +15,7 @@ const md1 = zenodoRaw;
     id: zenodoRaw.id
         ? `${zenodoRaw.id}`
         : "",
-      
+      url_page: `https://zenodo.org/records/${zenodoRaw.id}`,
     title:
       md.title || "",
 

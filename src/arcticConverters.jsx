@@ -1,32 +1,36 @@
-export function convertArcticXML(xmlJson) {
-
+export function convertArcticXML(url, xmlJson) {
   const ds =
-    xmlJson?.eml?.dataset
-    || xmlJson?.dataset
-    || {};
+    xmlJson?.eml?.dataset ||
+    xmlJson?.dataset ||
+    {};
+
+  const identifier = decodeURIComponent(
+    url.split("/").pop()
+  ).replace(/^doi:/, "");
 
   /* -----------------------------
    helper: convert XML value -> text
   ------------------------------*/
   function getText(value) {
-
     if (!value) return "";
 
     // already string
-    if (typeof value === "string")
+    if (typeof value === "string") {
       return value;
+    }
 
     // array
-    if (Array.isArray(value))
+    if (Array.isArray(value)) {
       return value
         .map(getText)
         .join(" ");
+    }
 
     // xml-js style { "#text": "...." }
     if (typeof value === "object") {
-
-      if (value["#text"])
+      if (value["#text"]) {
         return value["#text"];
+      }
 
       // if nested object
       return Object.values(value)
@@ -40,177 +44,143 @@ export function convertArcticXML(xmlJson) {
   /* -----------------------------
    creators
   ------------------------------*/
-  const creators =
-    [].concat(ds.creator || [])
-      .map(c => {
+  const creators = []
+    .concat(ds.creator || [])
+    .map((c) => {
+      const given = getText(
+        c.individualName?.givenName
+      );
 
-        const given =
-          getText(
-            c.individualName
-              ?.givenName
-          );
+      const sur = getText(
+        c.individualName?.surName
+      );
 
-        const sur =
-          getText(
-            c.individualName
-              ?.surName
-          );
+      return {
+        name: `${given} ${sur}`.trim(),
 
-        return {
-
-          name:
-            `${given} ${sur}`
-              .trim(),
-
-          affiliation:
-            getText(
-              c.organizationName
-            )
-
-        };
-
-      });
+        affiliation: getText(
+          c.organizationName
+        ),
+      };
+    });
 
   /* -----------------------------
    keywords
   ------------------------------*/
-  const keywords =
-    [].concat(
-      ds.keywordSet
-        ?.keyword
-      || []
+  const keywords = []
+    .concat(
+      ds.keywordSet?.keyword || []
     )
-      .map(getText);
+    .map(getText);
 
   /* -----------------------------
    documentation (methods)
   ------------------------------*/
   const documentation = [
+    ...(ds.methods?.methodStep || []).map((step) => {
+      const title = getText(
+        step.description?.section?.title
+      );
 
-    ...(ds.methods?.methodStep || [])
-      .map(step => {
+      const sectionPara = getText(
+        step.description?.section?.para
+      );
 
-        const title =
-          getText(
-            step.description
-              ?.section
-              ?.title
-          );
+      const para = getText(
+        step.description?.para
+      );
 
-        const sectionPara =
-          getText(
-            step.description
-              ?.section
-              ?.para
-          );
-
-        const para =
-          getText(
-            step.description
-              ?.para
-          );
-
-        return [
-          title,
-          sectionPara,
-          para
-        ]
-          .filter(Boolean)
-          .join("\n");
-
-      }),
+      return [
+        title,
+        sectionPara,
+        para,
+      ]
+        .filter(Boolean)
+        .join("\n");
+    }),
 
     getText(
-      ds.methods
-        ?.sampling
-        ?.samplingDescription
-        ?.para
-    )
-
+      ds.methods?.sampling?.samplingDescription?.para
+    ),
   ]
     .filter(Boolean)
     .join("\n\n");
 
   /* -----------------------------
+   corresponding author
+  ------------------------------*/
+  const correspondingAuthor = getText(
+    ds.contact?.electronicMailAddress ||
+      ds.contact?.[0]?.electronicMailAddress
+  );
+
+  /* -----------------------------
+   spatial extent
+  ------------------------------*/
+  const spatialExtent =
+    ds.coverage?.geographicCoverage?.boundingCoordinates ||
+    "";
+
+  /* -----------------------------
+   award
+  ------------------------------*/
+  const award = getText(
+    ds.project?.award?.[0]?.awardNumber ||
+      ds.project?.award?.awardNumber
+  );
+
+  /* -----------------------------
    result
   ------------------------------*/
   return {
-    id:
-      ds?.["@_id"]
-      || "",
-      
-    metadataIdentifier:
-      ds?.["@_id"]
-      || "",
+    id: `doi:${identifier}`,
 
-    doi:
-      "doi:10.18739/AXXXXXX",
+    url_page: url,
 
-    title:
-      getText(ds.title),
+    metadataIdentifier: `doi:${identifier}`,
 
-    short_description:
-      getText(
-        ds.abstract
-          ?.para
-      ),
+    doi: `https://doi.org/${identifier}`,
+
+    title: getText(ds.title),
+
+    short_description: getText(
+      ds.abstract?.para
+    ),
 
     documentation,
 
-    publicationDate:
-      getText(ds.pubDate),
+    publicationDate: getText(
+      ds.pubDate
+    ),
 
-    authors:
-      creators,
+    authors: creators,
 
-    corresponding_author:
-      getText(
-        ds.contact?.electronicMailAddress || ds.contact[0]?.electronicMailAddress
-      ),
+    corresponding_author: correspondingAuthor,
 
     creators,
 
-    spatialExtent:
-      ds.coverage
-        ?.geographicCoverage
-        ?.boundingCoordinates
-      || "",
+    spatialExtent,
 
     keywords,
 
-    license:
-      getText(
-        ds.intellectualRights
-          ?.para
-      ),
+    license: getText(
+      ds.intellectualRights?.para
+    ),
 
-    award:
-      getText(
-        ds.project
-          ?.award[0]
-          ?.awardNumber || ds.project
-          ?.award
-          ?.awardNumber
-      ),
+    award,
 
-      url_download:
+    url_download:
       "https://arcticdata.io/metacat/d1/mn/v2/packages/application%2Fbagit-1.0/resource_map",
 
-      url_api:
+    url_api:
       "https://arcticdata.io/metacat/d1/mn/v2/object/",
 
-    accessLevel:
-      "open",
+    accessLevel: "open",
 
-    publisher:
-      "Arctic Data Center",
+    publisher: "Arctic Data Center",
 
-    resourceType:
-      "dataset",
+    resourceType: "dataset",
 
-    version:
-      "1.0"
-
+    version: "1.0",
   };
-
 }

@@ -2,12 +2,13 @@ import fetch from "node-fetch";
 import { JSDOM } from "jsdom";
 
 export async function isValidUrl(UrlPage, datasetTitle) {
+    
   try {
     const response = await fetch(UrlPage, {
       method: "GET",
       redirect: "follow",
        headers: {
-    "Accept": "application/json",
+    "Accept": "text/html",
     "User-Agent": "TaiPI-Data-Repository/1.0",
   },
     });
@@ -66,6 +67,8 @@ const identifier = UrlPage.split("persistentId=")[1];
         .replace(/[^\p{L}\p{N}\s]/gu, " ")
         .replace(/\s+/g, " ")
         .trim();
+
+
 
     const text = normalize(pageTitle);
     const title = normalize(datasetTitle);

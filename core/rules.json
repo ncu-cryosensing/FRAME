@@ -48,7 +48,7 @@
       "type": "exists",
       "level": "REQUIRED",
       "principle": "Findable",
-      "successMsg": "A publication date is present.",
+      "successMsg": "Publication date is {pubdate}.",
       "failureMsg": "A publication date is missing."
     },
 
@@ -110,7 +110,7 @@
     {
       "id": "doi_exists_accessible",
       "field": "doi",
-      "type": "exists",
+      "type": "valid",
       "level": "REQUIRED",
       "principle": "Accessible",
       "successMsg": "The digital object identifier {value} is valid, accessible, and correctly points to the dataset.",
@@ -130,7 +130,7 @@
     {
       "id": "download_url",
       "field": "url_download",
-      "type": "validdownload",
+      "type": "valid",
       "level": "REQUIRED",
       "principle": "Accessible",
       "successMsg": "A downloading url {urlvalue} is accessible.",
@@ -199,23 +199,23 @@
       "type": "exists",
       "level": "REQUIRED",
       "principle": "Reusable",
-      "successMsg": "The document is licensed with Creative Commons {value}.",
+      "successMsg": "The dataset is licensed under {value}.",
       "failureMsg": "No resource license is present."
     },
 
     {
-      "id": "award_exists",
+      "id": "award",
       "field": "award",
-      "type": "exists",
+      "type": "notEmpty",
       "level": "OPTIONAL",
       "principle": "Reusable",
       "successMsg": "At least one award number is present.",
       "failureMsg": "No award number is present."
     },
       {
-      "id": "fundername_exists",
+      "id": "fundername",
       "field": "fundername",
-      "type": "exists",
+      "type": "notEmpty",
       "level": "OPTIONAL",
       "principle": "Reusable",
       "successMsg": "At least one funding agency is present.",
@@ -259,15 +259,15 @@
       "field": "url_map",
       "type": "exists",
       "principle": "Accessible",
-      "message": "Interactive map is present."
+      "message": "Interactive map is present at {value}"
     },
 
     {
-      "id": "taipihub_optional_accessible",
-      "field": "url_taipihub",
+      "id": "executable_cloud_environment",
+      "field": "cloud_environment",
       "type": "exists",
       "principle": "Accessible",
-      "message": "TaipiHUB is present."
+      "message": "Executable cloud environment is present at {value}"
     },
 
       {
@@ -275,7 +275,7 @@
       "field": "url_api",
       "type": "exists",
       "principle": "Accessible",
-      "message": "API end point is present."
+      "message": "API endpoint is present at {value}"
     },
        
       {

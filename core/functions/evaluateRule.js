@@ -28,7 +28,16 @@ export async function evaluateRule(
       condition = !!value;
       email = md.corresponding_author
       protocol = `Dataset retrieval protocol: ${aiQuality.retrieval_protocol}`
-      pubdate = new Date(md.publicationDate).toISOString().slice(0, 10).replaceAll("-", "/");
+      if (value) {
+    const date = new Date(value);
+
+    if (!isNaN(date.getTime())) {
+      pubdate = date
+        .toISOString()
+        .slice(0, 10)
+        .replaceAll("-", "/");
+    }
+  }
       if (aiQuality.data_retrieval==="true") {
           
           auth = "Dataset access requires authorization."

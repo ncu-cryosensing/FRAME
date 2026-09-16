@@ -68,6 +68,7 @@ const goodMd = {
   doi: "doi:10.18739/TEST",
   url_page: "https://example.org/view/test",
   url_download: "https://example.org/data.zip",
+  cloud_environment: "https://taipidata.ncu.edu.tw/taipihub/hub/spawn?dataset=11309301",
   url_api: "https://example.org/api",
   repository_name: "Example Repository",
   metadataIdentifier: "doi:10.18739/TEST",
@@ -224,10 +225,10 @@ describe("FRAME assessment API (core server)", () => {
     const { assessment } = await res.json();
 
     expect(assessment.totalChecks).toBe(21);
-    expect(assessment.failed).toBe(0);
-    expect(assessment.passed).toBe(21);
+    expect(assessment.failed).toBe(2);
+    expect(assessment.passed).toBe(19);
     expect(assessment.warnings).toBe(0);
-    expect(assessment.informational).toBe(6);
+    expect(assessment.informational).toBe(7);
 
     // AI was called because there was no cache hit.
     expect(fetchMock.mock.calls[1][0]).toContain("chat/completions");
@@ -280,7 +281,7 @@ describe("FRAME assessment API (core server)", () => {
     expect(assessment.totalChecks).toBe(21);
 
     // GET record, AI (cache ignored), PUT, landing page, download.
-    expect(fetchMock).toHaveBeenCalledTimes(5);
+    expect(fetchMock).toHaveBeenCalledTimes(6);
 
     expect(fetchMock.mock.calls[1][0]).toContain("chat/completions");
 
@@ -370,8 +371,8 @@ describe("GET /api/assess and /api/check-url (core server)", () => {
 
       expect(body.success).toBe(true);
       expect(body.assessment.totalChecks).toBe(21);
-      expect(body.assessment.failed).toBe(0);
-      expect(body.assessment.passed).toBe(21);
+      expect(body.assessment.failed).toBe(2);
+      expect(body.assessment.passed).toBe(19);
       expect(body.assessment.warnings).toBe(0);
 
       // the metadata was fetched from the upstream url (plain fetch, no options)

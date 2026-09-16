@@ -37,7 +37,7 @@ describe("isValidUrl", () => {
       method: "GET",
       redirect: "follow",
       headers: {
-        Accept: "application/json",
+        "Accept": "text/html",
         "User-Agent": "TaiPI-Data-Repository/1.0",
       },
     });

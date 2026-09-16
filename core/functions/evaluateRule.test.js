@@ -28,18 +28,19 @@ describe("evaluateRule", () => {
       expect(context.value).toBe("2024-01-01");
     });
 
-    it("fails for empty string, null and undefined values", async () => {
-      for (const empty of ["", null, undefined]) {
-        const { condition } = await evaluateRule(
-          { publicationDate: empty },
-          rule,
-          baseAi,
-          { validUrl: true, UrlPage: "" },
-          {}
-        );
-        expect(condition).toBe(false);
-      }
-    });
+   it("fails for empty string, null and undefined values", async () => {
+  for (const empty of ["", null, undefined]) {
+    const { condition } = await evaluateRule(
+      { publicationDate: empty },
+      rule,
+      baseAi,
+      { validUrl: true, UrlPage: "" },
+      {}
+    );
+
+    expect(condition).toBe(false);
+  }
+});
 
     it("builds the protocol and authorization context", async () => {
       const { context } = await evaluateRule(
@@ -221,7 +222,7 @@ describe("evaluateRule", () => {
   });
 
   describe("type: validdownload", () => {
-    const rule = { field: "url_download", type: "validdownload" };
+    const rule = { field: "url_download", type: "valid" };
 
     it("passes and exposes the download url", async () => {
       const { condition, context } = await evaluateRule(

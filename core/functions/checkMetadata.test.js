@@ -133,7 +133,7 @@ describe("checkMetadata", () => {
     const result = await checkMetadata(goodMd, rules);
 
     const apiInfo = result.informationalCheck.find(
-      (c) => c.message === "API end point is present."
+      (c) => c.message === "API endpoint is present at https://example.org/api"
     );
     expect(apiInfo).toBeDefined();
     expect(apiInfo.principle).toBe("Accessible");

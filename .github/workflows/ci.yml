@@ -1,4 +1,4 @@
-name: CI - Lint & Build
+name: CI - Lint, Build, & test:coverage
 
 on:
   push:

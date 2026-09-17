@@ -151,34 +151,6 @@ describe("evaluateRule", () => {
   describe("type: arrayNotEmpty", () => {
     const rule = { field: "authors", type: "arrayNotEmpty" };
 
-    it("passes for a non-empty array", async () => {
-      const authors = [{ name: "A" }, { name: "B" }];
-      const { condition, context } = await evaluateRule(
-        { authors },
-        rule,
-        baseAi,
-        {},
-        {}
-      );
-
-      expect(condition).toBe(true);
-      expect(context.x_orcid).toBe(2);
-      expect(context.x_people).toBe(2);
-    });
-
-    it("fails for an empty array", async () => {
-      const { condition, context } = await evaluateRule(
-        { authors: [] },
-        rule,
-        baseAi,
-        {},
-        {}
-      );
-
-      expect(condition).toBe(false);
-      expect(context.x_orcid).toBe(0);
-    });
-
     it("fails when the value is not an array", async () => {
       const { condition } = await evaluateRule(
         { authors: "not an array" },

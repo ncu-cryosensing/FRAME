@@ -16,6 +16,7 @@ export async function evaluateRule(
   let urlvalue = "";
   let x_orcid="";
   let x_people="";
+  let x_aff="";
   let email="";
   let protocol="";
   let auth="";
@@ -49,10 +50,16 @@ export async function evaluateRule(
     x_people = value.length;
 
     x_orcid = value.filter(
-      (a) => a.orcid?.trim() && a.affiliation?.trim()
-    ).length;
-
+      (a) => a.orcid?.trim()).length;
+    x_aff = value.filter(
+      (a) => a.affiliation?.trim()).length;
+    if (rule.id === "creator_identifier_exists") {
     condition = x_orcid > 0;
+  }
+    if (rule.id === "creator_affiliation_exists") {
+    condition = x_aff > 0;
+  }
+         
   } else {
     condition = value !== undefined && value !== null && value !== "";
   }

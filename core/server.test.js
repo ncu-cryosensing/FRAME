@@ -109,7 +109,7 @@ async function get(path) {
 
 describe("FRAME assessment API (core server)", () => {
   beforeAll(async () => {
-    //vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(console, "log").mockImplementation(() => {});
   vi.spyOn(console, "error").mockImplementation(() => {});
     await import("./server.js");
 

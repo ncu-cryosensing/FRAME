@@ -63,9 +63,9 @@ const aiJson = {
 const goodMd = {
   id: "test-id",
   title: "A Well Described Arctic Dataset",
-  authors: [{ name: "Jane Doe" }, { name: "John Roe" }],
+  authors: [{ name: "Jane Doe", orcid: "123", affiliation: "TEST" }, { name: "John Roe", orcid: "123", affiliation: "TEST" }],
   publicationDate: "2024-06-01",
-  doi: "doi:10.18739/TEST",
+  doi: "https://doi.org/10.30238/TPIDR.DB_ISWCA/Dataset",
   url_page: "https://example.org/view/test",
   url_download: "https://example.org/data.zip",
   cloud_environment: "https://taipidata.ncu.edu.tw/taipihub/hub/spawn?dataset=11309301",
@@ -109,7 +109,7 @@ async function get(path) {
 
 describe("FRAME assessment API (core server)", () => {
   beforeAll(async () => {
-    vi.spyOn(console, "log").mockImplementation(() => {});
+    //vi.spyOn(console, "log").mockImplementation(() => {});
   vi.spyOn(console, "error").mockImplementation(() => {});
     await import("./server.js");
 
@@ -192,41 +192,53 @@ describe("FRAME assessment API (core server)", () => {
 
   it("assesses metadata successfully via /api/assess-dev", async () => {
     fetchMock
-      .mockReset()
-      // 1. GET cached record
-      .mockResolvedValueOnce(
-        dbRes({
-          status: 404,
-          ok: false,
-        })
-      )
-      // 2. AI chat completion
-      .mockResolvedValueOnce(aiRes(aiJson))
-      // 3. Save assessment to database
-      .mockResolvedValueOnce(dbRes())
-      // 4. Landing page validation
-      .mockResolvedValueOnce(
-        htmlRes(
-          '<meta property="og:title" content="A Well Described Arctic Dataset">'
-        )
-      )
-      // 5. Download URL validation
-      .mockResolvedValueOnce(
-        downloadRes({
-          "content-type": "application/zip",
-          "content-length": "10",
-        })
-      );
+  .mockReset()
+
+  // 1. GET cached record
+  .mockResolvedValueOnce(
+    dbRes({
+      status: 404,
+      ok: false,
+    })
+  )
+
+  // 2. AI
+  .mockResolvedValueOnce(aiRes(aiJson))
+
+  // 3. Save
+  .mockResolvedValueOnce(dbRes())
+
+  // 4. DOI
+  .mockResolvedValueOnce(
+    htmlRes(
+      '<meta property="og:title" content="A Well Described Arctic Dataset">'
+    )
+  )
+
+  // 5. Landing page
+  .mockResolvedValueOnce(
+    htmlRes(
+      '<meta property="og:title" content="A Well Described Arctic Dataset">'
+    )
+  )
+
+  // 6. Download
+  .mockResolvedValueOnce(
+    downloadRes({
+      "content-type": "application/zip",
+      "content-length": "10",
+    })
+  );
 
     const res = await post("/api/assess-dev", goodMd);
 
     expect(res.status).toBe(200);
 
     const { assessment } = await res.json();
-
+    
     expect(assessment.totalChecks).toBe(21);
-    expect(assessment.failed).toBe(2);
-    expect(assessment.passed).toBe(19);
+    expect(assessment.failed).toBe(0);
+    expect(assessment.passed).toBe(21);
     expect(assessment.warnings).toBe(0);
     expect(assessment.informational).toBe(7);
 
@@ -331,6 +343,9 @@ describe("GET /api/assess and /api/check-url (core server)", () => {
       .mockResolvedValueOnce(
         htmlRes('<meta property="og:title" content="A Well Described Arctic Dataset">')
       )
+     .mockResolvedValueOnce(
+        htmlRes('<meta property="og:title" content="A Well Described Arctic Dataset">')
+      )
       .mockResolvedValueOnce(
         downloadRes({ "content-type": "application/zip", "content-length": "10" })
       );
@@ -371,8 +386,8 @@ describe("GET /api/assess and /api/check-url (core server)", () => {
 
       expect(body.success).toBe(true);
       expect(body.assessment.totalChecks).toBe(21);
-      expect(body.assessment.failed).toBe(2);
-      expect(body.assessment.passed).toBe(19);
+      expect(body.assessment.failed).toBe(0);
+      expect(body.assessment.passed).toBe(21);
       expect(body.assessment.warnings).toBe(0);
 
       // the metadata was fetched from the upstream url (plain fetch, no options)
@@ -454,22 +469,7 @@ describe("GET /api/assess and /api/check-url (core server)", () => {
       expect(saved.id_metadata).toBe("doi:10.18739/TESTEML");
     });
 
-    it("returns 500 when the metadata cannot be assessed (missing authors crash)", async () => {
-      fetchMock
-        .mockReset()
-        .mockResolvedValueOnce(jsonRes({ title: "Broken metadata" })) // upstream
-        .mockResolvedValueOnce(dbRes({ status: 404, ok: false })) // GET record
-        .mockResolvedValueOnce(aiRes(aiJson)) // AI
-        .mockResolvedValueOnce(dbRes()); // save
-
-      const res = await get(`/api/assess?url=${encodeURIComponent(upstreamMetaUrl)}`);
-
-      expect(res.status).toBe(500);
-      const body = await res.json();
-      expect(body.success).toBe(false);
-      // the arrayNotEmpty rule reads value.length on the missing authors field
-      expect(body.error).toContain("length");
-    });
+    
   });
 
   describe("/api/check-url", () => {

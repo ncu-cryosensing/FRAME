@@ -25,7 +25,7 @@ export async function evaluateRule(
 
     case "exists":
 
-      condition = !!value;
+      
       email = md.corresponding_author
       protocol = `Dataset retrieval protocol: ${aiQuality.retrieval_protocol}`
       if (value) {
@@ -45,7 +45,17 @@ export async function evaluateRule(
       else {
           auth = "Dataset access does not require authorization."
       }
-          
+     if (Array.isArray(value)) {
+    x_people = value.length;
+
+    x_orcid = value.filter(
+      (a) => a.orcid?.trim() && a.affiliation?.trim()
+    ).length;
+
+    condition = x_orcid > 0;
+  } else {
+    condition = value !== undefined && value !== null && value !== "";
+  }
 
       break;
 
@@ -65,10 +75,6 @@ export async function evaluateRule(
     case "arrayNotEmpty":
 
       condition = Array.isArray(value) && value.length > 0;
-        
-      x_orcid = value.length
-      x_people = value.length
-        
 
       break;
 

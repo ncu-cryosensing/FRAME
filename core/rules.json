@@ -25,7 +25,7 @@
     {
       "id": "creator_identifier_exists",
       "field": "authors",
-      "type": "arrayNotEmpty",
+      "type": "exists",
       "level": "REQUIRED",
       "principle": "Findable",
       "successMsg": "{x_orcid} out of {x_people} people have provided an ORCID.",
@@ -35,7 +35,7 @@
     {
       "id": "creator_affiliation_exists",
       "field": "authors",
-      "type": "arrayNotEmpty",
+      "type": "exists",
       "level": "REQUIRED",
       "principle": "Findable",
       "successMsg": "Creator affiliation is present.",
@@ -183,12 +183,12 @@
   
 
 {
-      "id": "corresponding_author_exists",
+      "id": "corresponding_author_email",
       "field": "corresponding_author",
       "type": "exists",
       "level": "REQUIRED",
       "principle": "Reusable",
-      "successMsg": "The corresponding author {email} is present.",
+      "successMsg": "The corresponding author is present and can be contacted by {email}.",
       "failureMsg": "The corresponding author is missing."
     },
 

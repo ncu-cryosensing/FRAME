@@ -194,10 +194,10 @@ export function convertArcticXML(xmlJson) {
       ),
 
       url_download:
-      "https://arcticdata.io/metacat/d1/mn/v2/packages/application%2Fbagit-1.0/resource_map" || "",
+      "https://arcticdata.io/metacat/d1/mn/v2/packages/application%2Fbagit-1.0/resource_map",
 
       url_api:
-      "https://arcticdata.io/metacat/d1/mn/v2/object/" || "",
+      "https://arcticdata.io/metacat/d1/mn/v2/object/",
 
     accessLevel:
       "open",

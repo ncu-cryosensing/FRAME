@@ -1,4 +1,4 @@
-name: CI - Lint & Build
+name: CI - Lint, Build, & test:coverage
 
 on:
   push:
@@ -32,3 +32,6 @@ jobs:
 
       - name: Build project
         run: npm run build
+
+      - name: Run tests with coverage
+        run: npm run test:coverage

@@ -3,7 +3,7 @@ import { countWords } from "./countWords.js";
 export async function evaluateRule(
   md,
   rule,
-  aiQuality, validurl, validdownload = {}
+  aiQuality, validurl, validdownload, validdoi = {}
 ) {
   let value = md[rule.field];
 
@@ -16,19 +16,29 @@ export async function evaluateRule(
   let urlvalue = "";
   let x_orcid="";
   let x_people="";
+  let x_aff="";
   let email="";
   let protocol="";
   let auth="";
-
- 
+  let pubdate="";
 
   switch (rule.type) {
 
     case "exists":
 
-      condition = !!value;
+      
       email = md.corresponding_author
       protocol = `Dataset retrieval protocol: ${aiQuality.retrieval_protocol}`
+      if (value) {
+    const date = new Date(value);
+
+    if (!isNaN(date.getTime())) {
+      pubdate = date
+        .toISOString()
+        .slice(0, 10)
+        .replaceAll("-", "/");
+    }
+  }
       if (aiQuality.data_retrieval==="true") {
           
           auth = "Dataset access requires authorization."
@@ -36,11 +46,29 @@ export async function evaluateRule(
       else {
           auth = "Dataset access does not require authorization."
       }
-          
+     if (Array.isArray(value)) {
+    x_people = value.length;
+
+    x_orcid = value.filter(
+      (a) => a.orcid?.trim()).length;
+    x_aff = value.filter(
+      (a) => a.affiliation?.trim()).length;
+    if (rule.id === "creator_identifier_exists") {
+    condition = x_orcid > 0;
+  }
+    if (rule.id === "creator_affiliation_exists") {
+    condition = x_aff > 0;
+  }
+         
+  } else {
+    condition = value !== undefined && value !== null && value !== "";
+  }
 
       break;
 
-
+    case "notEmpty":
+    condition = !!value;
+    break;
     case "wordCount":
 
       count = countWords(value);
@@ -54,27 +82,26 @@ export async function evaluateRule(
     case "arrayNotEmpty":
 
       condition = Array.isArray(value) && value.length > 0;
-        
-      x_orcid = value.length
-      x_people = value.length
-        
 
       break;
 
     case "valid":
           
-      condition = validurl.validUrl;
-  validvalue = validurl.UrlPage;
-  
+      if (rule.field === "url_page") {
+    condition = validurl?.validUrl === true;
+    validvalue = validurl?.UrlPage ?? "";
+  }
 
-      break;
+if (rule.field === "doi") {
+    condition = validdoi?.validUrl === true;
+   
+  }
 
-          case "validdownload":
-          
-      condition = validdownload.validUrl;
-      urlvalue = validdownload.url;
-  
-
+  if (rule.field === "url_download") {
+    condition = validdownload?.validUrl === true;
+    urlvalue = validdownload?.url ?? "";
+  }
+     
       break;
 
     
@@ -155,7 +182,8 @@ export async function evaluateRule(
         x_people,
         email,
         auth,
-        protocol
+        protocol,
+        pubdate
       
     },
   };

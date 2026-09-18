@@ -3,17 +3,20 @@ import { JSDOM } from "jsdom";
 
 export async function isValidDownloadUrl(url) {
   try {
-    const response = await fetch(url, {
-      method: "HEAD",
-      redirect: "follow"
-    });
+      
+   const response = await fetch(url, {
+  method: "GET",
+  redirect: "follow"
+});
+      
     const contentType =
       response.headers.get("content-type") || "";
 
     const contentLength =
       response.headers.get("content-length");
-
+   
     if (!response.ok) {
+        
       return false;
     }
 
@@ -25,6 +28,7 @@ export async function isValidDownloadUrl(url) {
       return false;
     }
 
+      
       return {
       validUrl: true,
       url,

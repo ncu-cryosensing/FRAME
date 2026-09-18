@@ -21,8 +21,11 @@ import { isValidUrl }
 import { checkMetadata }
   from "./functions/checkMetadata.js";
 
+import { hasCachedAiResult }
+  from "./functions/evaluateAIQuality.js";
 
-dotenv.config();
+
+dotenv.config({ quiet: true });
  const rules =
   JSON.parse(
     fs.readFileSync(
@@ -237,7 +240,10 @@ app.use(
               "JSON body is required",
           });
       }
- if (
+      const reAssess =
+        req.query.reassess === "true";
+
+  if (
         raw?.metadata?.creators
       ) {
 
@@ -248,7 +254,8 @@ app.use(
  const assessment =
         await checkMetadata(
           raw,
-          rules
+          rules,
+          reAssess
         );
 
         
@@ -270,6 +277,61 @@ app.use(
     }
   }
 );
+
+ app.post(
+  "/api/ai-cache-check",
+
+  async (req, res) => {
+
+    try {
+
+      let raw =
+        req.body;
+
+
+      if (
+        !raw ||
+        Object.keys(raw).length === 0
+      ) {
+
+        return res
+          .status(400)
+          .json({
+            success: false,
+            error:
+              "JSON body is required",
+          });
+      }
+
+      if (
+        raw?.metadata?.creators
+      ) {
+
+        raw =
+          convertZenodo(raw);
+      }
+
+      res.json({
+        cached:
+          await hasCachedAiResult(
+            raw
+          ),
+      });
+
+    }
+
+    catch (err) {
+
+      res
+        .status(500)
+        .json({
+          success: false,
+          error: err.message,
+        });
+    }
+  }
+);
+
  app.get(
   "/api/check-url",
 

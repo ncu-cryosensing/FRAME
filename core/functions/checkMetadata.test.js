@@ -151,7 +151,7 @@ describe("checkMetadata", () => {
     const downloadCheck = result.passedChecks.find(
       (c) =>
         c.message ===
-        "A downloading url https://example.org/data.zip is accessible."
+        "The dataset is associated with an accessible downloading URL https://example.org/data.zip"
     );
 
     expect(downloadCheck).toBeDefined();

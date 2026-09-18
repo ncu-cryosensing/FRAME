@@ -4,14 +4,36 @@ import { JSDOM } from "jsdom";
 export async function isValidUrl(UrlPage, datasetTitle) {
     
   try {
-    const response = await fetch(UrlPage, {
-      method: "GET",
-      redirect: "follow",
-       headers: {
-    "Accept": "text/html",
-    "User-Agent": "TaiPI-Data-Repository/1.0",
-  },
-    });
+
+      let response;
+
+if (UrlPage?.startsWith("https://doi.org/")) {
+  response = await fetch(
+    "https://taipidata.ncu.edu.tw/ai/v1/web/fetch",
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "firecrawl",
+        url: UrlPage,
+        format: "markdown",
+        max_characters: 0,
+      }),
+    }
+  );
+} else {
+  response = await fetch(UrlPage, {
+    method: "GET",
+    redirect: "follow",
+    headers: {
+      Accept: "text/html",
+      "User-Agent": "TaiPI-Data-Repository/1.0",
+    },
+  });
+}
 
     if (!response.ok) {
       return {
@@ -49,7 +71,6 @@ const identifier = UrlPage.split("persistentId=")[1];
 
 } else {
   const html = await response.text();
-
   const dom = new JSDOM(html);
   const doc = dom.window.document;
 
@@ -57,7 +78,7 @@ const identifier = UrlPage.split("persistentId=")[1];
     doc.querySelector('meta[property="og:title"]')?.content?.trim() ||
     doc.querySelector("h1")?.textContent?.trim() ||
     doc.querySelector("title")?.textContent?.trim() ||
-    null;
+    html;
 }
 
 

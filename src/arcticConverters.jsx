@@ -3,7 +3,7 @@ export function convertArcticXML(url, xmlJson) {
     xmlJson?.eml?.dataset ||
     xmlJson?.dataset ||
     {};
-        
+      
   const identifier = decodeURIComponent(
     url.split("/").pop()
   ).replace(/^doi:/, "") || "";
@@ -69,6 +69,9 @@ export function convertArcticXML(url, xmlJson) {
 
       return {
         name: `${given} ${sur}`.trim(),
+          orcid: getText(
+          c.userId["#text"]
+        ),
 
         affiliation: getText(
           c.organizationName

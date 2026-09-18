@@ -13,6 +13,9 @@ const emlJson = {
       creator: [
         {
           individualName: { givenName: "Jane", surName: "Doe" },
+          userId: {
+    "#text": "https://orcid.org/0000-0003-0506-1737"
+  },
           organizationName: "Polar Institute",
         },
       ],
@@ -56,7 +59,7 @@ describe("convertArcticXML (src)", () => {
     expect(md.short_description).toBe("This dataset describes 37 lakes.");
     expect(md.publicationDate).toBe("2024-09-15");
     expect(md.authors).toEqual([
-      { name: "Jane Doe", affiliation: "Polar Institute" },
+      { name: "Jane Doe", orcid: "https://orcid.org/0000-0003-0506-1737", affiliation: "Polar Institute" },
     ]);
     expect(md.corresponding_author).toBe("contact@arctic.org");
     expect(md.keywords).toEqual(["glaciology", "radar"]);

@@ -24,7 +24,7 @@
 
     {
       "id": "creator_identifier_exists",
-      "field": "authors",
+      "field": "creator_identifier",
       "type": "exists",
       "level": "REQUIRED",
       "principle": "Findable",
@@ -34,7 +34,7 @@
 
     {
       "id": "creator_affiliation_exists",
-      "field": "authors",
+      "field": "creator_affiliation",
       "type": "exists",
       "level": "REQUIRED",
       "principle": "Findable",
@@ -181,8 +181,8 @@
     },
 
 {
-      "id": "corresponding_author_email",
-      "field": "corresponding_author",
+      "id": "authors_email_exist",
+      "field": "authors_email",
       "type": "exists",
       "level": "REQUIRED",
       "principle": "Reusable",

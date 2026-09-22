@@ -27,7 +27,7 @@ export async function evaluateRule(
     case "exists":
 
       
-      email = md.corresponding_author
+      email = md.authors_email
       protocol = `Dataset retrieval protocol: ${aiQuality.retrieval_protocol}`
       if (value) {
     const date = new Date(value);
@@ -46,7 +46,9 @@ export async function evaluateRule(
       else {
           auth = "Dataset access does not require authorization."
       }
-     if (Array.isArray(value)) {
+     if (rule.field === "creator_identifier" || rule.field === "creator_affiliation") {
+    value = md.authors
+    
     x_people = value.length;
 
     x_orcid = value.filter(

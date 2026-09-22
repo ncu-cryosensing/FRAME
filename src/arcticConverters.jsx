@@ -124,7 +124,7 @@ export function convertArcticXML(url, xmlJson) {
   /* -----------------------------
    corresponding author
   ------------------------------*/
-  const correspondingAuthor = getText(
+  const authorsEmail = getText(
     ds.contact?.electronicMailAddress ||
       ds.contact?.[0]?.electronicMailAddress
   );
@@ -175,7 +175,7 @@ export function convertArcticXML(url, xmlJson) {
 
     authors: creators,
 
-    corresponding_author: correspondingAuthor,
+    authors_email: authorsEmail,
 
     creators,
 

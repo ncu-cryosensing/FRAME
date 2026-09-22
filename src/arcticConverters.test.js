@@ -61,7 +61,7 @@ describe("convertArcticXML (src)", () => {
     expect(md.authors).toEqual([
       { name: "Jane Doe", orcid: "https://orcid.org/0000-0003-0506-1737", affiliation: "Polar Institute" },
     ]);
-    expect(md.corresponding_author).toBe("contact@arctic.org");
+    expect(md.authors_email).toBe("contact@arctic.org");
     expect(md.keywords).toEqual(["glaciology", "radar"]);
     expect(md.license).toBe("Creative Commons Attribution");
     expect(md.award).toBe("NSF-999");
@@ -92,7 +92,7 @@ describe("convertArcticXML (src)", () => {
 
     expect(md.title).toBe("");
     expect(md.authors).toEqual([]);
-    expect(md.corresponding_author).toBe("");
+    expect(md.authors_email).toBe("");
     expect(md.documentation).toBe("");
     expect(md.keywords).toEqual([]);
     expect(md.id).toBe("doi:10.18739/A2RX93F75");

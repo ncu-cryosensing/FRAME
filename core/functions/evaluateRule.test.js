@@ -73,7 +73,7 @@ describe("evaluateRule", () => {
       const { context } = await evaluateRule(
         {
           publicationDate: "2024",
-          corresponding_author: "me@example.org",
+          authors_email: "me@example.org",
         },
         rule,
         baseAi,

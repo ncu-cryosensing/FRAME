@@ -46,25 +46,33 @@ export async function evaluateRule(
       else {
           auth = "Dataset access does not require authorization."
       }
-     if (rule.field === "creator_identifier" || rule.field === "creator_affiliation") {
-    value = md.authors
-    
-    x_people = value.length;
+    if (rule.field === "creator_identifier" || rule.field === "creator_affiliation") {
+  value = Array.isArray(md.authors) ? md.authors : [];
 
-    x_orcid = value.filter(
-      (a) => a.orcid?.trim()).length;
-    x_aff = value.filter(
-      (a) => a.affiliation?.trim()).length;
-    if (rule.id === "creator_identifier_exists") {
+  x_people = value.length;
+
+  x_orcid = value.filter(
+    (a) => a?.orcid?.trim()
+  ).length;
+
+  x_aff = value.filter(
+    (a) => a?.affiliation?.trim()
+  ).length;
+
+  if (rule.id === "creator_identifier_exists") {
     condition = x_orcid > 0;
   }
-    if (rule.id === "creator_affiliation_exists") {
+
+  if (rule.id === "creator_affiliation_exists") {
     condition = x_aff > 0;
   }
-         
-  } else {
-    condition = value !== undefined && value !== null && value !== "";
-  }
+
+} else {
+  condition =
+    value !== undefined &&
+    value !== null &&
+    value !== "";
+}
 
       break;
 

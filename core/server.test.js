@@ -87,7 +87,7 @@ const goodMd = {
     "Uncertainty estimates accompany every derived value so that downstream users can propagate errors into their own analyses. " +
     "Documentation of the processing code, including the version numbers of every software dependency, is stored in the same archive as the data itself.",
 
-  corresponding_author: "contact@example.org",
+  authors_email: "contact@example.org",
   license: "cc_by",
   award: "NSF-12345",
   fundername: "NSF"

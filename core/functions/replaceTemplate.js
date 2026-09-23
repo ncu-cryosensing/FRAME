@@ -11,6 +11,7 @@ export function replaceTemplate(msg, context = {}) {
       .replace("{x_people}", context.x_people ?? "")
       .replace("{email}", context.email ?? "")
       .replace("{auth}", context.auth ?? "")
-      .replace("{protocol}", context.protocol ?? "");
+      .replace("{protocol}", context.protocol ?? "")
+      .replace("{pubdate}", context.pubdate ?? "");
     
 }

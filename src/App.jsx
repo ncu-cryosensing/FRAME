@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect, useState, useRef } from 'react';
-import { Container, Tabs, Tab } from 'react-bootstrap';
+import { Container, Tabs, Tab, Spinner } from 'react-bootstrap';
 import SummaryChart from './components/SummaryChart';
 import AssessmentSection from './components/AssessmentSection';
 import CheckList from './components/CheckList';
@@ -16,14 +16,54 @@ function App({ setPage }) {
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  
+  const [reAssess, setReAssess] = useState(false);
+  const [hasCachedAi, setHasCachedAi] = useState(false);
   const fileInputRef = useRef(null);
     
     
   
   async function processMetadata(raw) {
 
-   const response2 = await fetch("http://localhost:3006/api/assess-dev", {
+  // check whether an AI result already exists in the database
+  try {
+
+    const cacheRes = await fetch("http://localhost:3006/api/ai-cache-check", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(raw)
+    });
+
+    if (cacheRes.ok) {
+
+      const cacheData = await cacheRes.json();
+
+      setHasCachedAi(cacheData.cached === true);
+
+      if (!cacheData.cached) {
+        setReAssess(false);
+      }
+
+    }
+    else {
+
+      setHasCachedAi(false);
+      setReAssess(false);
+
+    }
+
+  }
+  catch {
+
+    setHasCachedAi(false);
+    setReAssess(false);
+
+  }
+
+   const response2 = await fetch(
+    `http://localhost:3006/api/assess-dev?reassess=${reAssess ? "true" : "false"}`,
+    {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
@@ -54,14 +94,42 @@ const result = await response2.json();
 
     e.preventDefault();
 
+    setError('');
+    setLoading(true);
+    setData(null);
+    setHasCachedAi(false);
+    setReAssess(false);
+
+    if (dataset && !url.trim()) {
+
+      setLoading(true);
+
+      try {
+
+        await processMetadata(
+          dataset,
+          true
+        );
+
+      } catch (err) {
+
+        setError(err.message);
+
+      } finally {
+
+        setLoading(false);
+
+      }
+
+      return;
+    }
+
     if (!url.trim()) {
       setError('Enter URL or upload file');
       return;
     }
 
-    setError('');
-    setLoading(true);
-    setData(null);
+    
 
     try {
 
@@ -115,10 +183,9 @@ const result = await response2.json();
         const xmlDoc =
           new DOMParser()
             .parseFromString(text, 'application/xml');
-
         const parserError =
           xmlDoc.getElementsByTagName('parsererror')[0];
-
+       
         if (parserError)
           throw new Error('Invalid XML');
 
@@ -196,11 +263,14 @@ const result = await response2.json();
 
  
 
-  // clear URL input
-  setUrl('');
+  
+setUrl('');
 
-  setError('');
-  setLoading(true);
+setError('');
+setLoading(true);
+setData(null);
+setHasCachedAi(false);
+setReAssess(false);
 
 
     try {
@@ -268,7 +338,7 @@ const result = await response2.json();
   if (jsonObj["eml:eml"]?.dataset) {
 
     raw =
-      convertArcticXML(jsonObj["eml:eml"]);
+      convertArcticXML(url,jsonObj["eml:eml"]);
 
     
 
@@ -486,24 +556,37 @@ arcticdata.io,
       >
 
        <input
-  type="text"
-  placeholder="Enter JSON URL"
-  value={url}
-  onChange={(e) => setUrl(e.target.value)}
-  className="border p-2"
-/>
+          type="text"
+          placeholder="Enter JSON URL"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          disabled={loading}
+          className="border p-2"
+        />
         <input
-  ref={fileInputRef}
-  type="file"
-  accept=".json,.xml"
-  onChange={handleFileUpload}
-  className="border p-2"
-/>
+          ref={fileInputRef}
+          type="file"
+          accept=".json,.xml"
+          onChange={handleFileUpload}
+          disabled={loading}
+          className="border p-2"
+        />
 
         <button
           type="submit"
-          className="bg-blue-600 text-white p-2 rounded"
+          disabled={loading}
+          className="bg-blue-600 text-white p-2 rounded flex items-center justify-center gap-2 disabled:opacity-60"
         >
+
+          {loading && (
+            <Spinner
+              as="span"
+              animation="border"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+          )}
 
           {loading
             ? "Assessing..."
@@ -512,6 +595,32 @@ arcticdata.io,
         </button>
 
       </form>
+
+      
+
+      {hasCachedAi && (
+        <div >
+          
+
+          <label className="flex items-center gap-2 mb-1 cursor-pointer">
+            <input
+              type="hidden"
+              name="reAssessOption"
+              checked={!reAssess}
+              onChange={() => setReAssess(false)}
+            />
+          </label>
+
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="hidden"
+              name="reAssessOption"
+              checked={reAssess}
+              onChange={() => setReAssess(true)}
+            />
+          </label>
+        </div>
+      )}
 
       {error && (
   <div className="text-red-600">

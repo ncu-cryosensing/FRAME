@@ -69,6 +69,16 @@ app.post("/records", (req, res) => {
                 documentation
             )
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(id_metadata) DO UPDATE SET
+                ai_result_short_description = excluded.ai_result_short_description,
+                ai_result_documentation = excluded.ai_result_documentation,
+                ai_index_page = excluded.ai_index_page,
+                ai_doc_language = excluded.ai_doc_language,
+                ai_doc_references = excluded.ai_doc_references,
+                ai_data_retrieval = excluded.ai_data_retrieval,
+                ai_retrieval_protocol = excluded.ai_retrieval_protocol,
+                short_description = excluded.short_description,
+                documentation = excluded.documentation
         `).run(
             id_metadata,
             ai_result_short_description,

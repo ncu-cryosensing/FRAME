@@ -13,7 +13,7 @@ export function convertDataverse(dataverseRaw) {
   const citationFields =
     latest.metadataBlocks
       .citation.fields;
-
+    const identifier = latest.datasetPersistentId.replace(/^doi:/, "")
   function getField(name) {
 
     return citationFields
@@ -68,16 +68,18 @@ export function convertDataverse(dataverseRaw) {
       ?.value || [];
 
   return {
-
+    id:
+      `doi:${identifier}`,
+      
     metadataIdentifier:
       dataset.identifier
         ?.toString(),
-
+     url_page: `https://dataverse.harvard.edu/api/datasets/:persistentId?persistentId=doi:${identifier}`,
     identifier:
       latest.datasetPersistentId,
 
     doi:
-      latest.datasetPersistentId,
+      `https://doi.org/${identifier}`,
 
     title,
 

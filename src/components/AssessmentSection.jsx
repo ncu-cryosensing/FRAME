@@ -1,6 +1,6 @@
 const AssessmentSection = ({ title, value }) => (
   <div style={{ margin: '10px 0' }}>
-    <strong>{title}</strong>: {value}% complete
+    <strong>{title}</strong>: {Number(value).toFixed(2).replace(/\.00$/, '')}% complete
     <div style={{ height: '10px', background: '#ccc', marginTop: '4px' }}>
       <div style={{
         width: `${value}%`,

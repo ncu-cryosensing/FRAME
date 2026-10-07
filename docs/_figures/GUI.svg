@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2014" height="1060" viewBox="0 0 2014 1060">
+  <rect width="2014" height="1060" fill="#fff"/>
+
+  <!-- Header -->
+  <rect x="42" y="18" width="1930" height="84" rx="10" fill="#f5f6f7"/>
+  <text x="82" y="71" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="600" fill="#111">TaiPI Metadata Assessment</text>
+
+  <!-- Navigation -->
+  <text x="1611" y="70" font-family="Arial, Helvetica, sans-serif" font-size="23" fill="#111">Home</text>
+  <text x="1699" y="70" font-family="Arial, Helvetica, sans-serif" font-size="23" fill="#555">Generate JSON</text>
+  <text x="1878" y="70" font-family="Arial, Helvetica, sans-serif" font-size="23" fill="#555">Docs</text>
+
+  <!-- Example links -->
+  <text x="78" y="166" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#111">Example:</text>
+  <text x="184" y="166" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#2463e8" text-decoration="underline">/dummy-metadata.json</text>
+  <text x="455" y="166" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#2463e8" text-decoration="underline">Zenodo</text>
+  <text x="561" y="166" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#2463e8" text-decoration="underline">Dataverse</text>
+  <text x="693" y="166" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#2463e8" text-decoration="underline">arcticdata.io</text>
+  <text x="843" y="166" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#2463e8" text-decoration="underline">fair-metadata.json</text>
+  <text x="1062" y="166" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#2463e8" text-decoration="underline">poor-metadata.json</text>
+
+  <!-- URL input -->
+  <rect x="78" y="198" width="1891" height="61" fill="#fff" stroke="#d9dde3" stroke-width="1"/>
+  <text x="92" y="236" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#9aa0a6">Enter JSON URL</text>
+
+  <!-- File input -->
+  <rect x="78" y="284" width="1891" height="70" fill="#fff" stroke="#d9dde3" stroke-width="1"/>
+  <rect x="91" y="296" width="146" height="44" rx="4" fill="#f8f8f8" stroke="#777" stroke-width="1.5"/>
+  <text x="103" y="326" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#111">Choose File</text>
+  <text x="248" y="326" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#111">No file chosen</text>
+
+  <!-- Assess button -->
+  <rect x="78" y="378" width="1891" height="61" rx="8" fill="#2b66df"/>
+  <text x="1024" y="417" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#fff">Assess</text>
+</svg>

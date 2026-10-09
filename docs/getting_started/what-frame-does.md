@@ -1,7 +1,5 @@
 # What does FRAME do?
 
-## How it works
-
 FRAME reads a metadata record formatted in JSON (JavaScript Object Notation). This tool then performs multiple checks defined in `rules.json`. Finally, FRAME displays the status of each check and a summary report for further inspection. Here are some examples of the checks performed by FRAME:
 
 - Dataset title length
@@ -34,3 +32,13 @@ FRAME checks the quality of metadata records based on the FAIR data principles. 
 - **Reusable.** Data should be well-documented with clear licensing, provenance, and context so others can understand, trust, and reuse it appropriately for future research.
 
 Developed in 2016 by a group of scientists and organizations, the FAIR principles aim to improve data stewardship, especially for machine-readability, without necessarily requiring data to be "open" — they focus on making data well-described and usable, regardless of access restrictions.
+
+## How it works
+
+FRAME is a web-based tool that can be divided into three parts:
+
+1. **Main application**: A graphical interface for users to specify metadata inputs and check assessment reports. The metadata inputs are checked by a format converter to ensure they follow a desired format for FRAME to parse and analyze. 
+2. **Core API**: A core processor that performs various checks on the metadata inputs. It also communicates with an AI service since some checks are evaluated by a selected large language model (LLM). Besides, there is a separate endpoint for users to send metadata and retrieve reports without using the main application.
+3. **Database**: A database and an associated API for storing previous AI-based evaluations in order to conserve tokens.
+
+![FRAME architecture](_figures/FRAME_Architecture_v2.svg)

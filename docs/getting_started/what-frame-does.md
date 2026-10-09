@@ -41,4 +41,4 @@ FRAME is a web-based tool that can be divided into three parts:
 2. **Core API**: A core processor that performs various checks on the metadata inputs. It also communicates with an AI service since some checks are evaluated by a selected large language model (LLM). Besides, there is a separate endpoint for users to send metadata and retrieve reports without using the main application.
 3. **Database**: A database and an associated API for storing previous AI-based evaluations in order to conserve tokens.
 
-![FRAME architecture](../_figures/FRAME_Architecture_v2.svg)
+![FRAME architecture](../_figures/FRAME_Architecture_v2.png)

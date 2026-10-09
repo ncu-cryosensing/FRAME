@@ -42,21 +42,23 @@ Alternatively, you can install FRAME manually on your local machine. This requir
   - **Node.js 16 or later**
   - **npm** (included with Node.js) or **yarn**
 
-2. (Optional but recommended) If you would like to activate AI assessments for full functionality, you will need an API key from an AI agent. Here we recommend getting an API key from [OpenRouter](https://openrouter.ai/keys). Once you obtain an AI API key, create a `.env` file in the `api-service` folder with the following content:
-
-  ```env
-  OPENROUTER_API_KEY=your_ai_api_key
-  ```
-
-  Remember to replace `your_ai_api_key` with your actual API key.
-
-3. Get the source code of FRAME from the project repository, navigate to the project folder, and install dependencies:
+2. Get the source code of FRAME from the project repository, navigate to the project folder, and install dependencies:
 
   ```bash
   git clone https://github.com/ncu-cryosensing/FRAME.git
   cd FRAME
   npm install
   ```
+
+3. (Optional but recommended) If you would like to activate AI assessments for full functionality, you will need an API key from an AI agent. Here we recommend getting an API key from [OpenRouter](https://openrouter.ai/keys). Once you obtain an AI API key, create a `.env` file in the `core` folder with the following content:
+
+  ```env
+  ENDPOINT=your_ai_api_endpoint
+  API_KEY=your_ai_api_key
+  MODEL=your_ai_model_name
+  ```
+
+  Remember to replace all three property values (`your_ai_api_endpoint`, `your_ai_api_key`, `your_ai_model_name`) with actual information. The `core/.env.example` file provides an example for setting this up.
 
 #### Start the web tool
 

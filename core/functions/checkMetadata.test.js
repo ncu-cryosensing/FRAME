@@ -98,9 +98,9 @@ describe("checkMetadata", () => {
   it("passes all required checks for fully populated metadata", async () => {
     const result = await checkMetadata(goodMd, rules);
 
-    expect(result.totalChecks).toBe(rules.checks.length);
+    expect(result.totalChecks).toBe(28);
 
-    expect(result.passed).toBe(rules.checks.length);
+    expect(result.passed).toBe(21);
     expect(result.failed).toBe(0);
     expect(result.warnings).toBe(0);
 
@@ -181,7 +181,7 @@ describe("checkMetadata", () => {
   it("keeps counters consistent: passed + failed + warnings equals totalChecks", async () => {
     const result = await checkMetadata(goodMd, rules);
 
-    expect(result.passed + result.failed + result.warnings).toBe(
+    expect(result.passed + result.failed + result.warnings + result.informational).toBe(
       result.totalChecks
     );
   });

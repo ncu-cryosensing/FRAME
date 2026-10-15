@@ -10,6 +10,7 @@ parts:
   - caption: User guides
     chapters:
     - file: user_guides/running-frame
+    - file: user_guides/frame-json-format
 
   - caption: Community Resources
     chapters:

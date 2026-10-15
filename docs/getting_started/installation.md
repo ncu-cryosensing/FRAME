@@ -50,7 +50,7 @@ Alternatively, you can install FRAME manually on your local machine. This requir
   npm install
   ```
 
-3. (Optional but recommended) If you would like to activate AI assessments for full functionality, you will need an API key from an AI agent. Here we recommend getting an API key from [OpenRouter](https://openrouter.ai/keys). Once you obtain an AI API key, create a `.env` file in the `core` folder with the following content:
+3. (Optional but recommended) If you would like to activate AI assessments for full functionality, you will need an API key from an AI agent. Here we recommend getting an API key from [OpenRouter](https://openrouter.ai/keys), but you can freely specify and change to your favorite AI model at any time. Once you obtain an AI API key, create a `.env` file in the `core` folder with the following content:
 
   ```env
   ENDPOINT=your_ai_api_endpoint
@@ -75,7 +75,7 @@ npm run build
 
 FRAME's API service is designed for developers and data repository administrators who want to integrate FRAME into their own systems. Instead of using the built-in FRAME GUI, the API accepts a JSON-formatted metadata record and returns an assessment report in JSON.
 
-To use the FRAME API, simply follow the instructions above and get FRAME using Docker or manual installation. After the server starts, you can access localhost using a web browser on a different port: `http://localhost:3006` (default) for instructions and API usage examples. 
+To use the FRAME API, simply follow the instructions above and get FRAME using Docker or manual installation. After the server starts, you can access localhost using a web browser on a different port: `http://localhost:3006` (default) for instructions and API usage examples. For more details, see [](../user-guides/running-frame.md).
 
 <!-- , allowing them to build their own user interfaces, automate metadata validation workflows, or integrate FRAME with existing repository platforms. -->
 

@@ -37,7 +37,7 @@ Developed in 2016 by a group of scientists and organizations, the FAIR principle
 
 FRAME is a web-based tool that can be divided into three parts:
 
-1. **Main application**: A graphical interface for users to specify metadata inputs and check assessment reports. The metadata inputs are checked by a format converter to ensure they follow a desired format for FRAME to parse and analyze. 
+1. **Main application**: A graphical interface for users to specify metadata inputs and check assessment reports. The metadata inputs are checked and reformatted by a format converter to ensure they follow a desired format for FRAME to parse and analyze. We have implemented three format converters for metadata records retrieved from Zenodo, Arcticdata.io, and Dataverse. If no format converter is applicable, the raw input will be passed to the core API.
 2. **Core API**: A core processor that performs various checks on the metadata inputs. It also communicates with an AI service since some checks are evaluated by a selected large language model (LLM). Besides, there is a separate endpoint for users to send metadata and retrieve reports without using the main application.
 3. **Database**: A database and an associated API for storing previous AI-based evaluations in order to conserve tokens.
 

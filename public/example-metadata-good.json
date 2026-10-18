@@ -1,0 +1,44 @@
+{
+  "metadataGeneratedBy": "taipidata",
+  "id": "11309301",
+  "title": "Two Subglacial Lakes in the Canadian Arctic",
+  "metadataIdentifier": "11309301",
+  "metadataCode": "SLCA",
+  "authors": [
+    {
+      "name": "Whyjay Zheng",
+      "orcid": "0000-0002-2316-2614",
+      "affiliation": "Center for Space and Remote Sensing Research, National Central University, Taoyuan City, 320317, Taiwan",
+      "aff_numb": "1"
+    },
+    {
+      "name": "Joanne Knight",
+      "orcid": "xxxx-xxxx-xxxx-xxxx",
+      "affiliation": "Whatsup University, Night City, United Principality",
+      "aff_numb": "2"
+    },
+    {
+      "name": "Thuan Hong Tran",
+      "orcid": "xxxx-xxxx-xxxx-xxxx",
+      "affiliation": "Institute of Arctic and Mountain Studies, Daozuan City, Dai'uan",
+      "aff_numb": "3"
+    }
+  ],
+  "authors_email": "whyjz@csrsr.ncu.edu.tw",
+  "publicationDate": "2026-04-05T06:07:08.090Z",
+  "doi": "https://doi.org/10.30238/TPIDR.DB_ISWCA/Dataset",
+  "short_description": "This dataset contains:\n\n1. **Location** of the two reported subglacial lakes in the Canadian Arctic.\n2. **Evidence** of the lake existence, including the analysis of ice surface elevation and all source code.\n",
+  "license": "cc_by",
+  "documentation": "# Two Subglacial Lakes in the Canadian Arctic\n\n## Introduction\n\nThis dataset contains the locations of the two subglacial lakes in the Canadian Arctic, as well as the evidence of lake existence based on ice elevation analysis.\n\n## Content\n\n- `subglacial_lake_locations.gpkg`: GeoPackage file in the NSIDC Sea Ice Polar Stereographic North projection (EPSG:3413) showing the locations of two lakes.\n- `analysis*.ipynb`: Analysis for each lake. These Jupyter notebooks start by downloading ArcticDEM and ICESat-2 data and end with the visualization of the lake elevation change.\n- Other files: auxiliary data needed to execute `analysis*.ipynb`, such as glacier outlines[1].\n\n## Additional notes\n\nTo run the notebooks correctly, put all auxiliary data in the same folder where `analysis*.ipynb` are stored.\n\nThe details of the elevation change mode can be found in the associated publication[2], which can be accessed at https://doi.org/10.5194/tc-20-1699-2026.\n\n## References\n\n[1] RGI 7.0 Consortium. (2023). Randolph Glacier Inventory - A Dataset of Global Glacier Outlines, Version 7.0. NSIDC: National Snow and Ice Data Center. https://doi.org/10.5067/f6jmovy5navz\n[2] Zheng, W., van Wychen, W., Li, T., & Yamanokuchi, T. (2026). Active subglacial lakes in the Canadian Arctic identified by multi-annual ice elevation changes. The Cryosphere, 20(3), 1699–1714. https://doi.org/10.5194/tc-20-1699-2026\n",
+  "url_page":"https://taipidata.ncu.edu.tw/11309301",
+  "url_download": "https://taipidata.ncu.edu.tw/storage/data/11309301.tar.gz",
+  "url_map": "https://taipidata.ncu.edu.tw/map?id=11309301",
+  "cloud_environment": "https://taipidata.ncu.edu.tw/taipihub/hub/spawn?dataset=11309301",
+  "url_api": "https://taipidata.ncu.edu.tw/generate-api?id=11309301",
+  "spatialExtent": {
+    "Lake1": "[[[-80.35, 79.81], [-79.90, 79.86], [-80.31, 79.96], [-80.76, 79.91], [-80.35, 79.81]]]",
+    "Lake2": "[[[-80.62, 79.99], [-80.30, 80.03], [-80.44, 80.06], [-80.76, 80.02], [-80.62, 79.99]]]"
+  },
+  "award": "Science Council of Dai'uan (SCD): 1132116024 & 1142116025",
+  "resourceType": "dataset"
+}

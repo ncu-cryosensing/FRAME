@@ -236,7 +236,7 @@ describe("FRAME assessment API (core server)", () => {
 
     const { assessment } = await res.json();
     
-    expect(assessment.totalChecks).toBe(21);
+    expect(assessment.totalChecks).toBe(28);
     expect(assessment.failed).toBe(0);
     expect(assessment.passed).toBe(21);
     expect(assessment.warnings).toBe(0);
@@ -290,7 +290,7 @@ describe("FRAME assessment API (core server)", () => {
 
     const { assessment } = await res.json();
 
-    expect(assessment.totalChecks).toBe(21);
+    expect(assessment.totalChecks).toBe(28);
 
     // GET record, AI (cache ignored), PUT, landing page, download.
     expect(fetchMock).toHaveBeenCalledTimes(6);
@@ -385,7 +385,7 @@ describe("GET /api/assess and /api/check-url (core server)", () => {
       const body = await res.json();
 
       expect(body.success).toBe(true);
-      expect(body.assessment.totalChecks).toBe(21);
+      expect(body.assessment.totalChecks).toBe(28);
       expect(body.assessment.failed).toBe(0);
       expect(body.assessment.passed).toBe(21);
       expect(body.assessment.warnings).toBe(0);
@@ -419,7 +419,7 @@ describe("GET /api/assess and /api/check-url (core server)", () => {
       const body = await res.json();
 
       expect(body.success).toBe(true);
-      expect(body.assessment.totalChecks).toBe(21);
+      expect(body.assessment.totalChecks).toBe(25);
 
       // the metadata was fetched from the upstream url
       expect(fetchMock.mock.calls[0][0]).toBe(upstreamMetaUrl);
@@ -457,7 +457,7 @@ describe("GET /api/assess and /api/check-url (core server)", () => {
       const body = await res.json();
 
       expect(body.success).toBe(true);
-      expect(body.assessment.totalChecks).toBe(21);
+      expect(body.assessment.totalChecks).toBe(25);
 
       // the EML document was converted -> its @_id drives the db lookup
       expect(fetchMock.mock.calls[1][0]).toBe(

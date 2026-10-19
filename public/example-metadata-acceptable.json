@@ -1,0 +1,31 @@
+{
+  "metadataGeneratedBy": "presubmission-placeholder",
+  "id": "11410231",
+  "title": "Borehole logs in Svalbard between 2022 and 2025",
+  "metadataCode": "BLSB",
+  "authors": [
+    {
+      "name": "Qunha Ni",
+      "orcid": "xxxx-xxxx-xxxx-xxxx",
+      "affiliation": "Institute of Arctic and Mountain Studies, Daozuan City, Dai'uan",
+      "aff_numb": "1"
+    },
+    {
+      "name": "Thuan Hong Tran",
+      "affiliation": "Institute of Arctic and Mountain Studies, Daozuan City, Dai'uan",
+      "aff_numb": "2"
+    }
+  ],
+  "authors_email": "qunha@iams.edu.du",
+  "publicationDate": "2026-02-03T00:00:00.000Z",
+  "doi": "https://doi.org/10.30238/TPIDR.DB_11410231/Dataset",
+  "short_description": "This borehole data includes temperature and pressure records. This dataset is open for public access under the CC BY-NC-SA license.",
+  "license": "cc_by-nc-sa",
+  "documentation": "This borehole data includes temperature and pressure records from three sites in Svalbard. These sites started operation on July 11th, 2021, and ended on May 4th, 2023. \n\nFor methodology and additional information, including instrument specifications and measurement uncertainties/limitations, please see the relevant publication available at https://www.mdpi.com/2073-4441/18/6/661.",
+  "url_page":"https://doi.org/10.30238/TPIDR.DB_11410231/Dataset",
+  "url_download": "https://github.com/ncu-cryosensing/FRAME/non-existence",
+  "url_map": "https://github.com/ncu-cryosensing/FRAME",
+  "spatialExtent": [[[0,90],[90,90]]],
+  "award": "Science Council of Dai'uan (SCD)",
+  "resourceType2": "csv"
+}

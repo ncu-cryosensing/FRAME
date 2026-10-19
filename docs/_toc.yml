@@ -9,7 +9,9 @@ parts:
     
   - caption: User guides
     chapters:
-    - file: user_guides/generate-assessment-report
+    - file: user_guides/running-frame
+    - file: user_guides/frame-json-format
+    - file: user_guides/troubleshooting-faq
 
   - caption: Community Resources
     chapters:

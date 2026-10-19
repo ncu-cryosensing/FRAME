@@ -92,7 +92,7 @@ app.use(
  *         name: url
  *         schema:
  *           type: string
- *           example: https://taipidata.ncu.edu.tw/metadata-assessment/dummy-metadata.json
+ *           example: https://taipidata.ncu.edu.tw/frame/dummy-metadata.json
  *         required: true
  *         description: Metadata URL
  *     responses:

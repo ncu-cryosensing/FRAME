@@ -93,6 +93,7 @@ const validdownload = await isValidDownloadUrl(md.url_download)
     if (condition) {
 
       result.informational++;
+      result.totalChecks++;
 
       result.informationalCheck.push({
 

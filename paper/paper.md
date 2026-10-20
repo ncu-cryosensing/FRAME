@@ -81,7 +81,7 @@ Provide some examples and test results here in this section. (Feel free to initi
 
 # AI usage disclosure
 
-No AI tools were used during the conceptualization stage. 
+Generative AI was used for software debugging through ChatGPT Go. In addition, AI was incorporated into the core functionality for metadata quality checking. For the free model, we used `poolside/laguna-s-2.1`, while the paid model used was `gemini-3.7-flash-high`. All AI-generated suggestions were critically reviewed and modified where necessary, and their outputs were fully validated by the authors. The authors retain full responsibility for the final implementation and its correctness. No AI tools were used during the conceptualization stage. 
 
 <!-- No AI tools were used for documentation and paper writing.  -->
 

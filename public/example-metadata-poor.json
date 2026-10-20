@@ -1,0 +1,17 @@
+{
+  "metadataGeneratedBy": "testrepo",
+  "id": "1036",
+  "title": "Major Named Glaciers",
+  "authors": [
+    {
+      "name": "Joanne Knight",
+      "affiliation": "Whatsup University, Night City, United Principality",
+      "aff_numb": "1"
+    }
+  ],
+  "authors_email": "joannek@whatsup.edu.up",
+  "publicationDate": "2026-01-01",
+  "doi": "https://doi.org/xx.xxxx/xxxxxxx",
+  "short_description": "Information about major glaciers worldwide",
+  "documentation": "For major named glaciers around the worlf, this spreadsheet contains: \n(1) Name \n(2) Location \n(3) Area \n(4) Length \n(5) Estimated ice thickness \n(6) Recent mass balance"
+}

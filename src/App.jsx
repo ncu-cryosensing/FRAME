@@ -437,7 +437,7 @@ useEffect(() => {
 
           onClick={() => {
 
-          setUrl('dummy-metadata.json');
+          setUrl('example-metadata-good.json');
 
             setTimeout(() => {
 
@@ -452,9 +452,55 @@ useEffect(() => {
           className="text-blue-600 underline ml-2"
 
         >
-          /dummy-metadata.json,
+          good-metadata.json,
 
         </button>
+
+           <button
+
+          onClick={() => {
+
+          setUrl('example-metadata-acceptable.json');
+
+            setTimeout(() => {
+
+              document
+                .querySelector('form')
+                .requestSubmit();
+
+            }, 100);
+
+          }}
+
+          className="text-blue-600 underline ml-2"
+
+        >
+          acceptable-metadata.json,
+
+        </button>
+<button
+
+          onClick={() => {
+
+          setUrl('example-metadata-poor.json');
+
+            setTimeout(() => {
+
+              document
+                .querySelector('form')
+                .requestSubmit();
+
+            }, 100);
+
+          }}
+
+          className="text-blue-600 underline ml-2"
+
+        >
+          poor-metadata.json
+
+        </button>
+
 
               <button
   onClick={() => {setUrl('https://zenodo.org/api/records/13629087')
@@ -503,51 +549,7 @@ Dataverse,
 >
 arcticdata.io,
 </button>
-        <button
-
-          onClick={() => {
-
-          setUrl('fair-metadata.json');
-
-            setTimeout(() => {
-
-              document
-                .querySelector('form')
-                .requestSubmit();
-
-            }, 100);
-
-          }}
-
-          className="text-blue-600 underline ml-2"
-
-        >
-          fair-metadata.json,
-
-        </button>
-<button
-
-          onClick={() => {
-
-          setUrl('poor-metadata.json');
-
-            setTimeout(() => {
-
-              document
-                .querySelector('form')
-                .requestSubmit();
-
-            }, 100);
-
-          }}
-
-          className="text-blue-600 underline ml-2"
-
-        >
-          poor-metadata.json
-
-        </button>
-
+       
       </p>
 
       <form

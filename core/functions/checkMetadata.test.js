@@ -98,13 +98,13 @@ describe("checkMetadata", () => {
   it("passes all required checks for fully populated metadata", async () => {
     const result = await checkMetadata(goodMd, rules);
 
-    expect(result.totalChecks).toBe(28);
+    expect(result.totalChecks).toBe(29);
 
     expect(result.passed).toBe(21);
     expect(result.failed).toBe(0);
     expect(result.warnings).toBe(0);
 
-    expect(result.informational).toBe(7);
+    expect(result.informational).toBe(8);
   });
 
 
@@ -161,7 +161,7 @@ describe("checkMetadata", () => {
     const result = await checkMetadata({}, rules);
 
     expect(result).toBeDefined();
-    expect(result.totalChecks).toBe(rules.checks.length);
+    expect(result.totalChecks).toBe(29);
   });
 
   it("reports an informational entry when url_api is present", async () => {

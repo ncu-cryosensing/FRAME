@@ -133,7 +133,8 @@ if (rule.field === "doi") {
       } else {
 
         condition =
-          aiQuality.short_description !== "Poor";
+          aiQuality.short_description == "Good";
+          
 
         aiResult1 =
           `Readability and informativeness for Short Description is ${aiQuality.short_description}`;
@@ -161,7 +162,7 @@ if (rule.field === "doi") {
       } else {
 
         condition =
-          aiQuality.documentation !== "Poor";
+          aiQuality.documentation == "Good";
 
         aiResult2 =
           `Readability and informativeness for Documentation is ${aiQuality.documentation}`;

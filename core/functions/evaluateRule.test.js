@@ -321,7 +321,7 @@ describe("evaluateRule", () => {
       expect(context.aiResult2).toBe("AI failed to assess Documentation");
     });
 
-    it("passes when the AI rating is not Poor", async () => {
+    it("not passes when the AI rating is not Good", async () => {
       const { condition, context } = await evaluateRule(
         { documentation: "docs" },
         rule,
@@ -330,7 +330,7 @@ describe("evaluateRule", () => {
         {}
       );
 
-      expect(condition).toBe(true);
+      expect(condition).toBe(false);
       expect(context.aiResult2).toBe(
         "Readability and informativeness for Documentation is Fair"
       );

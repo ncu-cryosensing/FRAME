@@ -79,7 +79,59 @@ export async function evaluateAIQuality(md, reAssess = false) {
               role: "user",
 
               content: `
-Evaluate readability and informativeness.
+Evaluate only the metadata descriptions. Do not assess the quality of the dataset itself. Classify each field independently as Poor, Fair, or Good based on how effectively it describes the dataset.
+
+1. Short Description
+
+Evaluate the short description according to its purpose as a concise summary of the dataset. Do not expect the level of detail or completeness required in full documentation.
+
+Poor
+The description is missing, incomprehensible, or so vague or generic that users cannot identify what the dataset actually contains. It may mention only a broad topic without providing meaningful information about the dataset. 
+
+Fair
+The description identifies the general subject or contents of the dataset but provides limited specificity or context. Users can obtain a basic idea of the dataset, but some ambiguity remains about its actual contents, purpose, or scope.
+
+Good
+The description is concise, clear, and sufficiently specific to help users understand what the dataset contains or represents. It provides meaningful information about the dataset's subject, purpose, key contents, or distinguishing characteristics, as appropriate. It does not need to include every detail, methodology, spatial or temporal coverage, or usage instruction if these are better suited to the documentation.
+
+Important rules for short descriptions:
+
+Brevity is expected and must not be penalized by itself.
+
+Do not require the short description to explain all dataset details.
+
+If the short description contains fewer than 20 words, classify it as Poor, regardless of its informativeness.
+
+If the short description contains 20 words or more, evaluate it using the Poor, Fair, and Good criteria above.
+
+A concise description can be Good if it clearly and specifically communicates the dataset's main contents.
+
+Classify based on informativeness and specificity, not word count alone.
+
+2. Documentation
+
+Evaluate the documentation according to how effectively it explains the dataset and helps users understand or use it.
+
+Poor
+The documentation is missing, extremely brief, vague, or overly generic. It provides insufficient information to understand the dataset. Important relevant details, such as contents, context, spatial or temporal coverage, methodology, or usage instructions, are largely missing.
+
+Fair
+The documentation provides meaningful information about the dataset but leaves notable gaps in context, explanation, interpretation, or practical usage. It may describe the dataset and refer to external publications or resources without sufficiently explaining important aspects within the documentation itself. It is generally understandable but offers limited guidance for users who want to interpret or use the data.
+
+Good
+The documentation is clear, specific, and informative. It adequately explains the dataset's purpose, contents, context, and relevant characteristics. Where applicable, it includes details such as spatial or temporal coverage, methodology, file contents, processing procedures, or usage instructions that enable users to understand and appropriately use the dataset.
+
+Important rules for documentation:
+
+Evaluate completeness relative to the dataset's nature and complexity.
+
+Do not require information that is irrelevant or inapplicable.
+
+Do not reward length alone; evaluate the actual information provided.
+
+Do not automatically assign a rating based only on word count.
+
+Input
 
 Short Description:
 ${md.short_description || ""}

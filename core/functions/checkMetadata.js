@@ -90,24 +90,28 @@ const validdownload = await isValidDownloadUrl(md.url_download)
       validdownload,
       validdoi
     );
-    if (condition) {
+  
 
       result.informational++;
       result.totalChecks++;
 
+     const message = condition
+    ? replaceTemplate(rule.message, context)
+    : replaceTemplate(
+        rule.nonExistsMessage ?? "Information is not provided.",
+        context
+      );
+        
       result.informationalCheck.push({
 
-        message:
-          replaceTemplate(
-            rule.message, context
-          ),
+        message,
 
         level: "INFO",
 
         principle:
           rule.principle,
       });
-    }
+    
   }
 
 

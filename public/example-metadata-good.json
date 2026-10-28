@@ -1,6 +1,7 @@
 {
   "metadataGeneratedBy": "taipidata",
   "id": "11309301",
+  "repository_name": "TaiPI Data Repository",
   "title": "Inventory of subglacial water in the Canadian Arctic",
   "metadataIdentifier": "11309301",
   "metadataCode": "SLCA",
@@ -39,6 +40,7 @@
     "Lake1": "[[[-80.35, 79.81], [-79.90, 79.86], [-80.31, 79.96], [-80.76, 79.91], [-80.35, 79.81]]]",
     "Lake2": "[[[-80.62, 79.99], [-80.30, 80.03], [-80.44, 80.06], [-80.76, 80.02], [-80.62, 79.99]]]"
   },
-  "award": "Science Council of Dai'uan (SCD): 1132116024 & 1142116025",
+  "fundername": "Science Council of Dai'uan (SCD)",
+  "award": "1132116024 & 1142116025",
   "resourceType": "dataset"
 }

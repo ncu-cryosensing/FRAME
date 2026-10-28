@@ -8,6 +8,7 @@ import { XMLParser } from 'fast-xml-parser';
 import { convertZenodo }from './zenodoConverters';
 import { convertDataverse }from './dataverseConverters';
 import { convertArcticXML }from './arcticConverters';
+import { FileJson, ExternalLink } from "lucide-react";
 
 function App({ setPage }) {
 
@@ -437,7 +438,7 @@ useEffect(() => {
 
           onClick={() => {
 
-          setUrl('dummy-metadata.json');
+          setUrl('example-metadata-good.json');
 
             setTimeout(() => {
 
@@ -452,9 +453,55 @@ useEffect(() => {
           className="text-blue-600 underline ml-2"
 
         >
-          /dummy-metadata.json,
+          good-metadata.json,
 
         </button>
+
+           <button
+
+          onClick={() => {
+
+          setUrl('example-metadata-acceptable.json');
+
+            setTimeout(() => {
+
+              document
+                .querySelector('form')
+                .requestSubmit();
+
+            }, 100);
+
+          }}
+
+          className="text-blue-600 underline ml-2"
+
+        >
+          acceptable-metadata.json,
+
+        </button>
+<button
+
+          onClick={() => {
+
+          setUrl('example-metadata-poor.json');
+
+            setTimeout(() => {
+
+              document
+                .querySelector('form')
+                .requestSubmit();
+
+            }, 100);
+
+          }}
+
+          className="text-blue-600 underline ml-2"
+
+        >
+          poor-metadata.json
+
+        </button>
+
 
               <button
   onClick={() => {setUrl('https://zenodo.org/api/records/13629087')
@@ -503,51 +550,7 @@ Dataverse,
 >
 arcticdata.io,
 </button>
-        <button
-
-          onClick={() => {
-
-          setUrl('fair-metadata.json');
-
-            setTimeout(() => {
-
-              document
-                .querySelector('form')
-                .requestSubmit();
-
-            }, 100);
-
-          }}
-
-          className="text-blue-600 underline ml-2"
-
-        >
-          fair-metadata.json,
-
-        </button>
-<button
-
-          onClick={() => {
-
-          setUrl('poor-metadata.json');
-
-            setTimeout(() => {
-
-              document
-                .querySelector('form')
-                .requestSubmit();
-
-            }, 100);
-
-          }}
-
-          className="text-blue-600 underline ml-2"
-
-        >
-          poor-metadata.json
-
-        </button>
-
+       
       </p>
 
       <form
@@ -692,8 +695,22 @@ arcticdata.io,
                 )}
 
               </p>
+                <a
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-flex rounded-lg border border-blue-200
+              bg-blue-50 px-3 py-2
+              text-sm font-medium text-blue-700
+              transition-colors
+              hover:border-blue-300 hover:bg-blue-100 items-center gap-2 text-blue-600 hover:text-blue-800 hover:underline"
+>
+  <FileJson size={18} />
+  View metadata JSON
+  <ExternalLink size={14} />
+</a>
 
-              <div className="flex flex-col md:flex-row">
+              <div className="flex flex-col md:flex-row mt-5">
 
                 <div className="mr-5">
 

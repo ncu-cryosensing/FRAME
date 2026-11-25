@@ -10,6 +10,7 @@ const [formData, setFormData] = useState({
 
   metadataGeneratedBy: "taipidata",
   id: "",
+  repository_name:"",
   title: "",
   metadataIdentifier: "",
 
@@ -35,9 +36,9 @@ const [formData, setFormData] = useState({
 
   url_download: "",
   url_map: "",
-  url_taipihub: "",
+  cloud_environment: "",
   url_api: "",
-
+  fundername:"",
   award: "",
 
   resourceType: ""
@@ -180,6 +181,18 @@ e.target.value)}
 
 </div>
 
+<div className="col-12">
+
+<label>Repository Name</label>
+
+<input
+className="form-control"
+value={formData.repository_name}
+onChange={e =>
+updateField("repository_name", e.target.value)}
+/>
+
+</div>
 
 <div className="col-12">
 
@@ -392,7 +405,20 @@ e.target.value)}
 <br/>
 <div className="col-12">
 
-<label>Award</label>
+<label>Funding Agency</label>
+
+<input
+className="form-control"
+value={formData.fundername}
+onChange={e =>
+updateField("fundername", e.target.value)}
+/>
+
+</div>
+    <br/>
+<div className="col-12">
+
+<label>Award Number</label>
 
 <input
 className="form-control"

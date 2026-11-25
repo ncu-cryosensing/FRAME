@@ -22,7 +22,7 @@ function Main() {
                 style={{ cursor: "pointer" }}
                 onClick={() => setPage("/")}
               >
-                TaiPI Metadata Assessment
+                FAIR Review and Metadata Evaluation Engine (FRAME)
               </span>
             </Navbar.Brand>
 
@@ -46,7 +46,7 @@ function Main() {
                 </Nav.Link>
 
                 <Nav.Link
-                  href="https://taipidata.ncu.edu.tw/metadata-assessment/docs/"
+                  href="https://frame-metadata-assessment.readthedocs.io/en/latest/user_guides/running-frame.html"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
